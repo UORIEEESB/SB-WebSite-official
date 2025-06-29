@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 function Counter({ target, duration = 2000 }: { target: number; duration?: number }) {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
     const start = Date.now()
-    const end = start + duration
     const step = () => {
       const now = Date.now()
       const progress = Math.min((now - start) / duration, 1)
@@ -31,9 +31,9 @@ const logos = [
 export default function About() {
   return (
     <section
-  id="about"
-  className="w-full max-w-7xl mx-auto px-6 sm:px-10 py-20 text-white rounded-3xl bg-neutral-900/60 backdrop-blur-md overflow-hidden"
->
+      id="about"
+      className="w-full max-w-7xl mx-auto px-6 sm:px-10 py-20 text-white rounded-3xl bg-neutral-900/60 backdrop-blur-md overflow-hidden"
+    >
       {/* Heading & Paragraphs */}
       <div className="md:w-4/5 text-left space-y-6 pl-8">
         <h2 className="text-4xl font-extrabold">Our Presence</h2>
@@ -64,19 +64,24 @@ export default function About() {
       </div>
 
       {/* Scrolling Subchapter Logos */}
-      <div className="overflow-hidden whitespace-nowrap mt-6 pl-8 pr-8 bg-amber-50">
-        <div className="animate-marquee inline-flex gap-10">
-          {[...logos, ...logos].map((logo, index) => (
-            <img
-              key={index}
-              src={logo}
-              alt={`Subchapter logo ${index + 1}`}
-              className="h-16 w-auto opacity-80 hover:opacity-100 transition duration-300"
-              draggable={false}
-            />
-          ))}
-        </div>
-      </div>
+<div className="overflow-hidden whitespace-nowrap mt-6 px-8 bg-amber-50 rounded-lg">
+  <div className="animate-marquee inline-flex gap-10 items-center">
+    {[...logos, ...logos].map((logo, index) => (
+      <div key={index} className="relative h-16 flex-shrink-0">
+      <Image
+        src={logo}
+        alt={`Subchapter logo ${index + 1}`}
+        width={256}        // intrinsic width of your logo image
+        height={128}       // intrinsic height of your logo image
+        style={{ height: '64px', width: 'auto' }}  // scale down to 64px height, auto width to keep ratio
+        className="object-contain opacity-80 hover:opacity-100 transition duration-300"
+        draggable={false}
+      />
+    </div>
+    
+    ))}
+  </div>
+</div>
 
       {/* Animation */}
       <style jsx>{`

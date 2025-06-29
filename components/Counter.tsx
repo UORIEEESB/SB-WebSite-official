@@ -12,7 +12,6 @@ export function Counter({ target, duration = 2000 }: CounterProps) {
 
   useEffect(() => {
     const start = Date.now()
-    const end = start + duration
     const step = () => {
       const now = Date.now()
       const progress = Math.min((now - start) / duration, 1)

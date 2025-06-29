@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const teamMembers = [
   {
@@ -23,7 +24,7 @@ const teamMembers = [
     role: "Technical Lead",
     photo: "/images/welcome.jpg",
   },
-  // Repeat or add more members for smoother loop
+  // Add more members if needed
 ];
 
 export default function Team() {
@@ -47,11 +48,13 @@ export default function Team() {
         >
           {[...teamMembers, ...teamMembers].map(({ name, role, photo }, index) => (
             <div key={`${name}-${index}`} className="flex flex-col items-center space-y-3">
-              <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg shadow-blue-600/50">
-                <img
+              <div className="relative w-32 h-32 rounded-full overflow-hidden shadow-lg shadow-blue-600/50">
+                <Image
                   src={photo}
                   alt={name}
-                  className="object-cover w-full h-full"
+                  width={128}   // fixed width
+                  height={128}  // fixed height
+                  className="object-cover"
                 />
               </div>
               <h3 className="text-lg font-semibold whitespace-nowrap">{name}</h3>

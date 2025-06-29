@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const events = [
   {
@@ -46,11 +46,13 @@ export default function Events() {
             key={title}
             className="bg-neutral-800 rounded-lg overflow-hidden shadow-lg hover:shadow-blue-600 transition-shadow"
           >
-            <div className="h-48 w-full relative">
-              <img
+            <div className="relative h-48 w-full">
+              <Image
                 src={image}
                 alt={title}
-                className="object-cover w-full h-full"
+                width={400}     // Set a fixed width
+                height={192}    // Set height consistent with aspect ratio 400:192
+                className="object-cover"
               />
             </div>
             <div className="p-6">
