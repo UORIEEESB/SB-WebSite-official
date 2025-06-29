@@ -12,7 +12,7 @@ export default function Hero() {
           Empowering Engineering Excellence
         </h1>
         <p className="text-gray-300 text-lg">
-          Welcome to the IEEE Student Branch of the University of Ruhuna! We are a vibrant community of passionate students dedicated to innovation, technology, and professional growth. As part of the world&apos;s largest technical professional organization, our branch provides a dynamic platform for students to engage in hands-on projects, technical workshops, leadership development, and global networking opportunities. We strive to empower future engineers and technologists by fostering a culture of creativity, collaboration, and continuous learning. Whether you're looking to expand your knowledge, connect with industry leaders, or make an impact through technology, you&apos;ll find your place here with us.
+          Welcome to the IEEE Student Branch of the University of Ruhuna! We are a vibrant community of passionate students dedicated to innovation, technology, and professional growth. As part of the world&apos;s largest technical professional organization, our branch provides a dynamic platform for students to engage in hands-on projects, technical workshops, leadership development, and global networking opportunities. We strive to empower future engineers and technologists by fostering a culture of creativity, collaboration, and continuous learning. Whether you&apos;re looking to expand your knowledge, connect with industry leaders, or make an impact through technology, you&apos;ll find your place here with us.
         </p>
         <a
           href="#about"
