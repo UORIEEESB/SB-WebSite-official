@@ -33,7 +33,6 @@ export default function Events() {
       id="events"
       className="max-w-7xl mx-auto px-6 sm:px-10 py-20 text-white"
     >
-      {/* 🔗 Clickable heading linking to /news */}
       <Link href="/news">
         <h2 className="text-4xl font-extrabold mb-12 text-center hover:underline cursor-pointer">
           News & Events
@@ -50,15 +49,15 @@ export default function Events() {
               <Image
                 src={image}
                 alt={title}
-                width={400}     // Set a fixed width
-                height={192}    // Set height consistent with aspect ratio 400:192
-                className="object-cover"
+                width={400}
+                height={192}
+                className="object-cover w-full h-full"
               />
             </div>
-            <div className="p-6">
+            <div className="p-6 text-white">
               <h3 className="text-xl font-semibold mb-2">{title}</h3>
               <p className="text-sm text-blue-400 mb-3">{date}</p>
-              <p className="text-gray-300 text-sm">{description}</p>
+              <p className="text-sm text-gray-200">{description}</p>
             </div>
           </div>
         ))}
