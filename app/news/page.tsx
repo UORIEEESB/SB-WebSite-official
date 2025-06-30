@@ -123,8 +123,9 @@ export default function NewsPage() {
           ))}
         </div>
 
-        <Footer />
+        
       </div>
+      <Footer />
     </main>
   )
 }
