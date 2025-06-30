@@ -34,9 +34,10 @@ export default function NewsPage() {
       }}
     >
       <AnimatedCircuit />
+      <Navbar />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 text-white rounded-2xl bg-black/40 backdrop-blur-md">
-        <Navbar />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 text-white rounded-2xl backdrop-blur-md">
+        
 
         <h1 className="text-4xl font-bold mb-2 text-center">All News & Events</h1>
         <p className="text-gray-300 mb-10 text-center">
