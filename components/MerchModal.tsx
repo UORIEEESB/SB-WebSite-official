@@ -10,7 +10,7 @@ export default function MerchModal() {
 
   useEffect(() => {
     const hasSeenModal = localStorage.getItem('seenMerchModal')
-    if (hasSeenModal) {
+    if (!hasSeenModal) {
       setTimeout(() => setIsOpen(true), 1000)
     }
   }, [])
