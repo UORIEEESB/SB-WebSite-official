@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import AwardBadge from './AwardBadge'
 
 function Counter({ target, duration = 2000 }: { target: number; duration?: number }) {
   const [count, setCount] = useState(0)

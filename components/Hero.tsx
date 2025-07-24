@@ -1,6 +1,5 @@
 'use client'
 
-import AwardBadge from './AwardBadge'
 
 export default function Hero() {
   return (
