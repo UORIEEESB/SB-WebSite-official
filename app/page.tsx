@@ -10,6 +10,7 @@ import FloatingCarousel from "@/components/FloatingCarousel"
 import FloatingLogo from "@/components/FloatingLogo"
 import AnimatedCircuit from "@/components/AnimatedCircuit"
 import SBTimeline from "@/components/SBTimeline"
+import AwardBadge from "@/components/AwardBadge"
 
 export default function Home() {
   return (
@@ -38,6 +39,7 @@ export default function Home() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Navbar />
         <div className="h-16" />
+        <AwardBadge />
         <Hero />
         <About />
         <Events />
