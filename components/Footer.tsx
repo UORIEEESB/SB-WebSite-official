@@ -1,6 +1,50 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { FaTwitter, FaLinkedin, FaFacebookF } from 'react-icons/fa'
+import { FaYoutube } from 'react-icons/fa6'
 
 export default function Footer() {
+  const [footerData, setFooterData] = useState({
+    address: '',
+    university: '',
+    line1: '',
+    line2: '',
+    email: '',
+    phone: '',
+    facebook: '',
+    twitter: '',
+    linkedin: '',
+    youtube: '',
+  })
+
+  useEffect(() => {
+    async function fetchFooterData() {
+      try {
+        const res = await fetch('/api/HomePageContent')
+        const data = await res.json()
+        const content = data.homepageData
+
+        setFooterData({
+          address: content.Address || '',
+          university: content.University || '',
+          line1: content.Address_Line_1 || '',
+          line2: content.Address_Line_2 || '',
+          email: content.Email || '',
+          phone: content.Phone || '',
+          facebook: content.Facebook || '',
+          twitter: content.Twitter || '',
+          linkedin: content.Linkedin || '',
+          youtube: content.Youtube || '',
+        })
+      } catch (error) {
+        console.error('Error fetching footer data:', error)
+      }
+    }
+
+    fetchFooterData()
+  }, [])
+
   return (
     <footer className="relative bg-white/10 backdrop-blur-md text-white w-full mt-20 overflow-hidden rounded-t-3xl border-t border-white/20 shadow-inner">
       {/* Wedge-shaped top edge */}
@@ -21,10 +65,10 @@ export default function Footer() {
         <div>
           <h4 className="text-2xl font-bold text-blue-400 mb-5">Address</h4>
           <p className="text-base leading-relaxed text-gray-200">
-            IEEE Student Branch<br />
-            XYZ University<br />
-            123 Main Street<br />
-            City, State, ZIP
+            {footerData.address && <>{footerData.address}<br /></>}
+            {footerData.university && <>{footerData.university}<br /></>}
+            {footerData.line1 && <>{footerData.line1}<br /></>}
+            {footerData.line2 && <>{footerData.line2}</>}
           </p>
         </div>
 
@@ -42,30 +86,69 @@ export default function Footer() {
         {/* Contact */}
         <div>
           <h4 className="text-2xl font-bold text-blue-400 mb-5">Contact</h4>
-          <p className="text-base text-gray-200">info@ieee-branch.org</p>
-          <p className="text-base text-gray-200 mt-2">+1 (123) 456-7890</p>
+          {footerData.email && <p className="text-base text-gray-200">{footerData.email}</p>}
+          {footerData.phone && <p className="text-base text-gray-200 mt-2">{footerData.phone}</p>}
         </div>
 
         {/* Social Media */}
         <div>
           <h4 className="text-2xl font-bold text-blue-400 mb-5">Follow Us</h4>
           <div className="flex space-x-5 text-2xl">
-            <a href="#" className="hover:text-blue-400 transition-transform transform hover:scale-110">
-              <FaTwitter />
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-transform transform hover:scale-110">
-              <FaLinkedin />
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-transform transform hover:scale-110">
-              <FaFacebookF />
-            </a>
-          </div>
+  {footerData.twitter && (
+    <a
+      href={footerData.twitter}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Twitter"
+      title="Twitter"
+      className="hover:text-blue-400 transition-transform transform hover:scale-110"
+    >
+      <FaTwitter />
+    </a>
+  )}
+  {footerData.linkedin && (
+    <a
+      href={footerData.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="LinkedIn"
+      title="LinkedIn"
+      className="hover:text-blue-400 transition-transform transform hover:scale-110"
+    >
+      <FaLinkedin />
+    </a>
+  )}
+  {footerData.facebook && (
+    <a
+      href={footerData.facebook}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Facebook"
+      title="Facebook"
+      className="hover:text-blue-400 transition-transform transform hover:scale-110"
+    >
+      <FaFacebookF />
+    </a>
+  )}
+  {footerData.youtube && (
+    <a
+      href={footerData.youtube}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="YouTube"
+      title="YouTube"
+      className="hover:text-blue-400 transition-transform transform hover:scale-110"
+    >
+      <FaYoutube />
+    </a>
+  )}
+</div>
         </div>
       </div>
 
       {/* Bottom bar */}
       <div className="text-center text-sm text-gray-300 py-6 border-t border-white/10 backdrop-blur-md">
-        &copy; 2025 IEEE Student Branch. All rights reserved.
+        &copy; {new Date().getFullYear()} IEEE Student Branch. All rights reserved.
       </div>
     </footer>
   )

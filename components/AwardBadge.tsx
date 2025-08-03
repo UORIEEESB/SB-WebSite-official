@@ -6,15 +6,30 @@ import Image from 'next/image'
 
 export default function AwardBadge() {
   const [visible, setVisible] = useState(true)
+  const [awardImage, setAwardImage] = useState<string | null>(null)
 
   useEffect(() => {
+    // Hide after 8 seconds
     const timer = setTimeout(() => setVisible(false), 8000)
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    const fetchAward = async () => {
+      try {
+        const res = await fetch('/api/HomePageContent')
+        const { homepageData } = await res.json()
+        setAwardImage(homepageData?.Award_Image)
+      } catch (err) {
+        console.error('Failed to fetch award image:', err)
+      }
+    }
+    fetchAward()
+  }, [])
+
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && awardImage && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -24,13 +39,13 @@ export default function AwardBadge() {
         >
           {/* Podium Image */}
           <Image
-            src="/images/award-badge.jpg"
-            alt="Podium"
+            src={awardImage}
+            alt="Award"
             fill
             className="object-contain"
           />
 
-          {/* Adjusted Glowing Title */}
+          {/* Glowing Title */}
           <motion.div
             animate={{
               textShadow: [
