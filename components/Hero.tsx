@@ -1,27 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 
 export default function Hero() {
-  const [heroTitle, setHeroTitle] = useState('Empowering Engineering Excellence')
-  const [heroParagraph, setHeroParagraph] = useState(
-    "Welcome to the IEEE Student Branch of the University of Ruhuna! We are a vibrant community of passionate students dedicated to innovation, technology, and professional growth. As part of the world's largest technical professional organization, our branch provides a dynamic platform for students to engage in hands-on projects, technical workshops, leadership development, and global networking opportunities. We strive to empower future engineers and technologists by fostering a culture of creativity, collaboration, and continuous learning. Whether you're looking to expand your knowledge, connect with industry leaders, or make an impact through technology, you'll find your place here with us."
-  )
-
-  useEffect(() => {
-    const fetchHeroContent = async () => {
-      try {
-        const res = await fetch('/api/HomePageContent')
-        const data = await res.json()
-        if (data.Hero_Title) setHeroTitle(data.Hero_Title)
-        if (data.Hero_Paragraph) setHeroParagraph(data.Hero_Paragraph)
-      } catch (error) {
-        console.error('Failed to load hero content:', error)
-      }
-    }
-
-    fetchHeroContent()
-  }, [])
   return (
     <section
       id="welcome"
@@ -30,10 +10,10 @@ export default function Hero() {
       {/* Right Side: Intro Content */}
       <div className="md:w-4/5 text-center md:text-left space-y-6 pl-8">
         <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
-        {heroTitle}
+          Empowering Engineering Excellence
         </h1>
         <p className="text-gray-300 text-lg">
-        {heroParagraph}
+          Welcome to the IEEE Student Branch of the University of Ruhuna! We are a vibrant community of passionate students dedicated to innovation, technology, and professional growth. As part of the world&apos;s largest technical professional organization, our branch provides a dynamic platform for students to engage in hands-on projects, technical workshops, leadership development, and global networking opportunities. We strive to empower future engineers and technologists by fostering a culture of creativity, collaboration, and continuous learning. Whether you&apos;re looking to expand your knowledge, connect with industry leaders, or make an impact through technology, you&apos;ll find your place here with us.
         </p>
         <a
           href="#about"

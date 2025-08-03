@@ -29,31 +29,6 @@ const logos = [
 ]
 
 export default function About() {
-  const [aboutTitle, setAboutTitle] = useState('')
-  const [aboutPara, setAboutPara] = useState('')
-  const [projects, setProjects] = useState(0)
-  const [members, setMembers] = useState(0)
-  const [subchapters, setSubchapters] = useState(0)
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch('/api/HomePageContent')
-        const data = await res.json()
-        const content = data.homepageData
-
-        setAboutTitle(content.About_Title || '')
-        setAboutPara(content.About_Para || '')
-        setProjects(parseInt(content.Projects) || 0)
-        setMembers(parseInt(content.Members) || 0)
-        setSubchapters(parseInt(content.Sub_Chapters) || 0)
-      } catch (err) {
-        console.error('Failed to load about data:', err)
-      }
-    }
-
-    fetchData()
-  }, [])
   return (
     <section
       id="about"
@@ -61,10 +36,9 @@ export default function About() {
     >
       {/* Heading & Paragraphs */}
       <div className="md:w-4/5 text-left space-y-6 pl-8">
-        <h2 className="text-4xl font-extrabold">{aboutTitle || 'Our Presence'}</h2>
+        <h2 className="text-4xl font-extrabold">Our Presence</h2>
         <p className="text-gray-300 text-lg leading-relaxed">
-        {aboutPara ||
-            'The IEEE Student Branch of the University of Ruhuna has established a strong presence both locally and internationally through its active participation in various technical, professional, and humanitarian initiatives.'}
+          The IEEE Student Branch of the University of Ruhuna has established a strong presence both locally and internationally through its active participation in various technical, professional, and humanitarian initiatives. Our members have consistently represented the university at IEEE regional events, competitions, and conferences, showcasing innovation and excellence. We are proud to be recognized for our collaborative projects, impactful outreach programs, and commitment to advancing technology for the benefit of humanity.
         </p>
         <p className="text-gray-400 text-base">
           Join us to be part of a global network that supports your career growth and technical development.
@@ -74,9 +48,9 @@ export default function About() {
       {/* Centered Counters */}
       <div className="flex justify-center gap-16 mt-12 mb-8">
         {[
-          { label: 'Projects', value: projects },
-          { label: 'Members', value: members },
-          { label: 'Subchapters', value: subchapters },
+          { label: 'Projects', value: 150 },
+          { label: 'Members', value: 600 },
+          { label: 'Subchapters', value: 7 },
         ].map(({ label, value }) => (
           <div key={label} className="flex flex-col items-center relative">
             <div className="relative w-24 h-24 flex items-center justify-center rounded-full before:absolute before:inset-0 before:rounded-full before:bg-blue-500/30 before:blur-xl before:animate-pulse">

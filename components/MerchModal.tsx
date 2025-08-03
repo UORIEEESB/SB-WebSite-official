@@ -5,32 +5,12 @@ import { Dialog } from '@headlessui/react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
-interface HomepageData {
-  Merch_Img: string
-  Merch_Price: string
-  Merch_Buy_Link: string
-  // other fields...
-}
-
 export default function MerchModal() {
   const [isOpen, setIsOpen] = useState(false)
-  const [merchData, setMerchData] = useState<HomepageData | null>(null)
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/HomePageContent') // Adjust the route to your actual API route path
-        const data = await res.json()
-        setMerchData(data.homepageData)
-      } catch (error) {
-        console.error('Failed to fetch merch data', error)
-      }
-    }
-
-    fetchData()
-
     const hasSeenModal = localStorage.getItem('seenMerchModal')
-    if (hasSeenModal) {
+    if (!hasSeenModal) {
       setTimeout(() => setIsOpen(true), 1000)
     }
   }, [])
@@ -39,8 +19,6 @@ export default function MerchModal() {
     localStorage.setItem('seenMerchModal', 'true')
     setIsOpen(false)
   }
-
-  if (!merchData) return null
 
   return (
     <AnimatePresence>
@@ -75,7 +53,7 @@ export default function MerchModal() {
                   className="relative"
                 >
                   <Image
-                    src={merchData.Merch_Img}
+                    src="/images/merch-pack.jpg"
                     alt="IEEE Merch Pack"
                     width={350}
                     height={200}
@@ -89,7 +67,7 @@ export default function MerchModal() {
                     transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
                     className="absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-sm font-bold px-3 py-1 rounded-full shadow-lg"
                   >
-                    {merchData.Merch_Price}
+                    Rs. 2,500
                   </motion.div>
                 </motion.div>
 
@@ -110,7 +88,7 @@ export default function MerchModal() {
                     Maybe Later
                   </button>
                   <a
-                    href={merchData.Merch_Buy_Link}
+                    href="/merch"
                     className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-md transition-all"
                   >
                     Buy Now

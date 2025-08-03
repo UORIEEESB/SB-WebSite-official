@@ -4,13 +4,10 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Mail } from 'lucide-react' 
-import ContactModal from '@/components/ContactModal'
-
-  
 
 export default function Navbar() {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
-  const [open, setOpen] = useState(false)
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-70 backdrop-blur-md z-50 shadow-md">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 sm:px-10 h-16">
@@ -57,16 +54,10 @@ export default function Navbar() {
 
           {/* Contact with Wiggling Icon */}
           <li>
-          <button
-  type="button"
-  onClick={() => setOpen(true)}
-  className="hover:text-blue-500 transition flex items-center gap-1 text-white"
->
-  Contact
-  <Mail className="w-5 h-5 animate-wiggle text-blue-400" />
-</button>
-
-<ContactModal isOpen={open} onClose={() => setOpen(false)} />
+            <a href="#contact" className="hover:text-blue-500 transition flex items-center gap-1">
+              Contact
+              <Mail className="w-5 h-5 animate-wiggle text-blue-400" />
+            </a>
           </li>
         </ul>
       </div>

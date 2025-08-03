@@ -1,27 +1,41 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/image'
+
+const timelineItems = [
+  {
+    image: '/images/welcome.jpg',
+    title: 'Branch Founded',
+    description: 'IEEE Student Branch was established at UoR.',
+    date: '2010',
+  },
+  {
+    image: '/images/about.jpg',
+    title: 'First Workshop',
+    description: 'Hosted our first tech workshop for students.',
+    date: '2012',
+  },
+  {
+    image: '/images/events.jpg',
+    title: 'Regional Recognition',
+    description: 'Won award for most active student branch.',
+    date: '2017',
+  },
+  {
+    image: '/images/about.jpg',
+    title: 'Global Collaboration',
+    description: 'Worked with international IEEE branches.',
+    date: '2020',
+  },
+  {
+    image: '/images/team.jpg',
+    title: 'TechFest Launch',
+    description: 'Inaugurated our annual TechFest event.',
+    date: '2023',
+  },
+]
 
 export default function SBTimeline() {
-  const [timelineItems, setTimelineItems] = useState<
-    { image: string; title: string; description: string; date: string }[]
-  >([]);
-
-  useEffect(() => {
-    async function fetchTimeline() {
-      try {
-        const res = await fetch('/api/OurJourney');
-        const data = await res.json();
-        setTimelineItems(data.timelineItems);
-      } catch (error) {
-        console.error('Failed to fetch timeline data:', error);
-      }
-    }
-
-    fetchTimeline();
-  }, []);
-
   return (
     <section
   id="sb-timeline"

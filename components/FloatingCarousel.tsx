@@ -4,55 +4,20 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
-interface Section {
-  id: string
-  preview: string
-}
-
-const sectionIds = ['welcome', 'about', 'events', 'sb-timeline', 'team']
+const sections = [
+  { id: 'welcome', preview: '/images/welcome.jpg' },
+  { id: 'about', preview: '/images/about.jpg' },
+  { id: 'events', preview: '/images/events.jpg' },
+  { id: 'sb-timeline', preview: '/images/welcome.jpg' },
+  { id: 'team', preview: '/images/team.jpg' },
+]
 
 export default function FloatingCarousel() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [beamOffset, setBeamOffset] = useState(0)
-  const [sections, setSections] = useState<Section[]>([])
 
   const circumference = 1 * Math.PI * 230 // for r=230
   const arcLength = 50 // beam length
-
-  useEffect(() => {
-    async function fetchAnimationImages() {
-      try {
-        const res = await fetch('/api/HomePageContent')
-        const data = await res.json()
-        const content = data.homepageData
-
-        const fallback = '/images/welcome.jpg'
-
-        const images = [
-          content.Animation_img_1,
-          content.Animation_img_2,
-          content.Animation_img_3,
-          content.Animation_img_4,
-          content.Animation_img_5,
-        ].map((img) => img || fallback)
-
-        const populatedSections = sectionIds.map((id, index) => ({
-          id,
-          preview: images[index] || fallback,
-        }))
-
-        setSections(populatedSections)
-      } catch (error) {
-        console.error('Failed to fetch animation images:', error)
-        setSections(sectionIds.map((id, i) => ({
-          id,
-          preview: `/images/fallback${i + 1}.jpg`,
-        })))
-      }
-    }
-
-    fetchAnimationImages()
-  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -105,25 +70,23 @@ export default function FloatingCarousel() {
         </svg>
 
         {/* Section Image */}
-<AnimatePresence mode="wait">
-  {sections[activeIndex] && (
-    <motion.div
-      key={sections[activeIndex].preview}
-      initial={{ opacity: 0, scale: 0.94 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.94 }}
-      transition={{ duration: 0.6 }}
-      className="relative w-[480px] h-[480px] rounded-full overflow-hidden"
-    >
-      <Image
-        src={sections[activeIndex].preview}
-        alt="Section image"
-        fill
-        className="object-cover rounded-full"
-      />
-    </motion.div>
-  )}
-</AnimatePresence>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={sections[activeIndex].preview}
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.94 }}
+            transition={{ duration: 0.6 }}
+            className="relative w-[480px] h-[480px] rounded-full overflow-hidden"
+          >
+            <Image
+              src={sections[activeIndex].preview}
+              alt="Section image"
+              fill
+              className="object-cover rounded-full"
+            />
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Glow animation style */}
