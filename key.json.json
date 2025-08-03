@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ieee-ruhuna-web",
+  "private_key_id": "750fa8963abe4716139c3850d5527263a6d116a3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC5arcHZxto9ICf\njixxwTpI9ELE7Ngjo7aIWEGNbJsjmbaiXQtXWRa9u58sq/bLQy3eJ+9rQvLh4kf7\n8rPuybMSe7h9NKDrfDTKtl/rjZWXbYTb4unn0DFVpR/ZUtAaT2aGJY0mLo0QAL+h\nqqVWyo9V5ZtG+7n1hDj0r333GhZdBXJTS/cLJJfOKklDuB/1qYi2GMs9o6rTHv44\nrBK8vMqr0iGSBBbDRXxKdbUT+WZxQf27JE5mY77UK2or77nIM44NbVnAk/bQRmEm\nM1ZLQ0hnl8RAYu+7K9KHdnVHqT9U1f0gld6M/yf9R0r/tHZFMxq1q61rhlNw2eaq\nQ+XLgCkpAgMBAAECggEAHdbpu7xBMgPfS05DIs95BNKiiDShmCK5tnmVmx/2W6Va\nOgkFUTpaKZCvTi4impWmJRGCO13b3rRe51Io2O4G7puQlj3JA/zKNjFhgHQZtfP/\nJLAA+riLp//Z/0yPhxxuIHqcm590PjYQoQDoeO5CYQ2BjsvmInfz/pTbjc/Z94Ap\noTl1KO3F8zRiczmjsyFpDjV5opQeO9+OEUzIH4+eVQvRh06E1Ld3nxrY0bLCXtq+\ndahfktk0hfHm2QgP46W0e4ByaYcnH2hAXesM5NAOWyBRYS+yMqgJKPeDm1euczda\neTaBfGb/mPRaPqZQQswCb1kmrvKRnUdWlEzu4xvGsQKBgQDoDGsY53uMr+v6593+\nEYBGZFSbJXEaD3/f7UW0V61k4tIhqgThc8Fl7lSr2nrnoRvmcq8yprFYf7TuoBR7\nyWcqZIYLpvHBNH6vs+RYdELGHJ2a82fh4cueelvsXGkcS5YJbZr63iBalB+MLUwo\nHoYR6NynWwA0IUkBcV0lQ2ZOjQKBgQDMjh2QPXah/s1491aaQ2D1oM7xvNexzIjc\nsKSwko1+rCL2SpcA/4HYmOVBVDQyOBR8ZEcO50QfIrfzNdygq1X2KZKfABXgG5z6\nuHIFZFEKVbBvHrEJ3CMdSKCTrNCu9+yViHrPzmmdnqcStPnR5gIHxZwft81x6cTj\n3y2yCkHcDQKBgHhgqNZcj51mTdb1nhYFYjQiLDnn7IqGa+Hwpu5tZYgmmrfYCXwj\nnrqQLuCQEJ5E18Ju0DBIhUvRxDzeUoH880XsrBUzX8rIvsfLXLP+a/12LtSJXOSz\nS/xEoZc2QVjqZUUy1Ok7fjE/EjaX8SAG5ao40O8IqExi0AqtkpKYKmSpAoGAbzF9\nno/ashqZRP1mpTqlNUBx3fRiZ7MgXp7jF1zC763Q34MSbKd3xO7wCEAmk3nqoOe9\nvLs4S5iK1/lacjhQ5RwaKLZaLdW00pF64bVzXCPSYcUURaDVsbBuIXhahBIfF/X1\nlIrG3LiGZ2PbPR9D0Ue5I4C9fAOwVJJX+6UZwe0CgYBqD9Ovku0mZLxuATPWNnHQ\n0Hqeui1Xg3z/V6YotObrHHPQ9zjPLnsxv0Q1nE7mytLZeMgNfrfS5dmfAr8htsJ6\nqEg2mACf7ygyk11xgbTjU8xS7I12nn0homDD5jZbtWZI+RgDymN6jV5Z+sbu+Qi8\nF/JokLDsFtNfsp7LwBkphg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "ieee-ruhuna@ieee-ruhuna-web.iam.gserviceaccount.com",
+  "client_id": "107417954565218199683",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ieee-ruhuna%40ieee-ruhuna-web.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
