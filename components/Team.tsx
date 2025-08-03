@@ -1,33 +1,25 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
-const teamMembers = [
-  {
-    name: "Alice Johnson",
-    role: "Chairperson",
-    photo: "/images/welcome.jpg",
-  },
-  {
-    name: "Bob Smith",
-    role: "Vice Chair",
-    photo: "/images/welcome.jpg",
-  },
-  {
-    name: "Carol Lee",
-    role: "Event Coordinator",
-    photo: "/images/welcome.jpg",
-  },
-  {
-    name: "David Kim",
-    role: "Technical Lead",
-    photo: "/images/welcome.jpg",
-  },
-  // Add more members if needed
-];
+type Member = {
+  name: string
+  role: string
+  photo: string
+}
 
 export default function Team() {
+  const [teamMembers, setTeamMembers] = useState<Member[]>([])
+
+  useEffect(() => {
+    fetch('/api/OurTeam')
+      .then((res) => res.json())
+      .then((data) => setTeamMembers(data.teamMembers || []))
+      .catch((err) => console.error('Failed to fetch team:', err))
+  }, [])
+
   return (
     <section
       id="team"
@@ -35,13 +27,12 @@ export default function Team() {
     >
       <h2 className="text-4xl font-extrabold mb-12 text-center">Meet the Team</h2>
 
-      {/* Horizontal marquee container */}
       <div className="overflow-hidden">
         <motion.div
           className="flex gap-12 w-max"
           animate={{ x: ['0%', '-50%'] }}
           transition={{
-            duration: 20,
+            duration: 60,
             repeat: Infinity,
             ease: 'linear',
           }}
@@ -52,8 +43,8 @@ export default function Team() {
                 <Image
                   src={photo}
                   alt={name}
-                  width={128}   // fixed width
-                  height={128}  // fixed height
+                  width={128}
+                  height={128}
                   className="object-cover"
                 />
               </div>
@@ -64,5 +55,5 @@ export default function Team() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

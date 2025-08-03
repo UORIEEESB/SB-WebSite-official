@@ -1,10 +1,9 @@
-'use client'
-
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 
 export default function AnimatedCircuit() {
   const pathRefs = useRef<SVGPathElement[]>([])
+  const containerRef = useRef<HTMLDivElement>(null) // ← add this
   const [paths, setPaths] = useState<string[]>([])
   const [pageHeight, setPageHeight] = useState(0)
   const [pageWidth, setPageWidth] = useState(0)
@@ -20,6 +19,13 @@ export default function AnimatedCircuit() {
   }, [])
 
   useEffect(() => {
+    if (containerRef.current && pageWidth && pageHeight) {
+      containerRef.current.style.height = `${pageHeight}px`
+      containerRef.current.style.width = `${pageWidth}px`
+    }
+  }, [pageHeight, pageWidth])
+
+  useEffect(() => {
     if (!pageHeight || !pageWidth) return
 
     const directions = [
@@ -30,23 +36,22 @@ export default function AnimatedCircuit() {
     ]
 
     const generatePath = () => {
-      const segments = 6 + Math.floor(Math.random() * 5) // same segment count
-    
+      const segments = 6 + Math.floor(Math.random() * 5)
+
       let x = Math.random() * pageWidth
       let y = Math.random() * pageHeight
       let path = `M${x.toFixed(2)} ${y.toFixed(2)}`
-    
+
       for (let i = 0; i < segments; i++) {
         const dir = directions[Math.floor(Math.random() * directions.length)]
-        // Increase min step from 30 to 50 and max from 70 to 120 for more spacing
         const step = 50 + Math.random() * 70
-    
+
         let newX = x + dir.dx * step
         let newY = y + dir.dy * step
-    
+
         newX = Math.min(Math.max(newX, 0), pageWidth)
         newY = Math.min(Math.max(newY, 0), pageHeight)
-    
+
         if (dir.dx !== 0) {
           path += ` H${newX.toFixed(2)}`
           x = newX
@@ -55,12 +60,11 @@ export default function AnimatedCircuit() {
           y = newY
         }
       }
-    
+
       return path
     }
-    
-    const numPaths = 120  // increased number of lines
-    
+
+    const numPaths = 400
     const generatedPaths = Array.from({ length: numPaths }, generatePath)
     setPaths(generatedPaths)
   }, [pageHeight, pageWidth])
@@ -86,8 +90,8 @@ export default function AnimatedCircuit() {
 
   return (
     <div
-      style={{ height: pageHeight, width: pageWidth }}
-      className="fixed top-0 left-0 z-0 pointer-events-none overflow-hidden"
+      ref={containerRef}
+      className="animated-circuit fixed top-0 left-0 z-0 pointer-events-none overflow-hidden"
     >
       <svg
         width={pageWidth}
