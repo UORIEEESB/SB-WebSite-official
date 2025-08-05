@@ -94,10 +94,10 @@ export default function FloatingCarousel() {
           <circle
             cx="250"
             cy="250"
-            r="230"
+            r="243"
             fill="none"
             stroke="#3b82f6"
-            strokeWidth="3"
+            strokeWidth="5"
             strokeDasharray={`${arcLength} ${circumference}`}
             strokeDashoffset={beamOffset}
             className="animate-glow"
