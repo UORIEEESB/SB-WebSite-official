@@ -11,6 +11,7 @@ import FloatingLogo from "@/components/FloatingLogo"
 import AnimatedCircuit from "@/components/AnimatedCircuit"
 import SBTimeline from "@/components/SBTimeline"
 import AwardBadge from "@/components/AwardBadge"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         background: `radial-gradient(circle at 25% 35%, #00629B 0%, #00497A 40%, #00325B 70%, #001F33 90%)`,
       }}
     >
+      <SpeedInsights/>
       {/* Animated circuit background */}
       <AnimatedCircuit />
 

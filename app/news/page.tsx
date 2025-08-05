@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import AnimatedCircuit from '@/components/AnimatedCircuit'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const EVENTS_PER_PAGE = 6
 
@@ -58,6 +59,7 @@ export default function NewsPage() {
     <main
   className="relative overflow-hidden min-h-screen bg-[radial-gradient(circle_at_25%_35%,#00629B_0%,#00497A_40%,#00325B_70%,#001F33_90%)]"
 >
+<SpeedInsights/>
       <AnimatedCircuit />
       <Navbar />
 
