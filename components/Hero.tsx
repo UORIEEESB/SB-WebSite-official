@@ -22,22 +22,23 @@ export default function Hero() {
 
     fetchHeroContent()
   }, [])
+
   return (
     <section
       id="welcome"
-      className="w-full max-w-7xl mx-auto px-6 sm:px-10 pt-32 pb-20 flex flex-col md:flex-row items-center justify-between text-white"
+      className="w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-10 pt-20 sm:pt-28 md:pt-32 pb-16 sm:pb-20 flex flex-col md:flex-row items-center justify-between text-white"
     >
-      {/* Right Side: Intro Content */}
-      <div className="md:w-4/5 text-center md:text-left space-y-6 pl-8">
-        <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
-        {heroTitle}
+      {/* Intro Content */}
+      <div className="md:w-4/5 text-center md:text-left space-y-6 md:pl-8">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-snug sm:leading-tight md:leading-tight">
+          {heroTitle}
         </h1>
-        <p className="text-gray-300 text-lg">
-        {heroParagraph}
+        <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+          {heroParagraph}
         </p>
         <a
           href="#about"
-          className="inline-block bg-blue-600 hover:bg-blue-500 transition px-6 py-3 text-white font-semibold rounded-lg"
+          className="inline-block bg-blue-600 hover:bg-blue-500 transition px-5 sm:px-6 py-2.5 sm:py-3 text-white font-semibold rounded-lg"
         >
           Learn More
         </a>

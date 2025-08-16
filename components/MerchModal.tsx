@@ -9,7 +9,6 @@ interface HomepageData {
   Merch_Img: string
   Merch_Price: string
   Merch_Buy_Link: string
-  // other fields...
 }
 
 export default function MerchModal() {
@@ -19,7 +18,7 @@ export default function MerchModal() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('/api/HomePageContent') // Adjust the route to your actual API route path
+        const res = await fetch('/api/HomePageContent')
         const data = await res.json()
         setMerchData(data.homepageData)
       } catch (error) {
@@ -29,14 +28,19 @@ export default function MerchModal() {
 
     fetchData()
 
-    const hasSeenModal = localStorage.getItem('seenMerchModal')
-    if (hasSeenModal) {
-      setTimeout(() => setIsOpen(true), 1000)
+    // Open the modal after 1 second
+    const openTimeout = setTimeout(() => setIsOpen(true), 1000)
+
+    // Auto-close after 8 seconds
+    const closeTimeout = setTimeout(() => setIsOpen(false), 10000)
+
+    return () => {
+      clearTimeout(openTimeout)
+      clearTimeout(closeTimeout)
     }
   }, [])
 
   const handleClose = () => {
-    localStorage.setItem('seenMerchModal', 'true')
     setIsOpen(false)
   }
 
@@ -46,7 +50,6 @@ export default function MerchModal() {
     <AnimatePresence>
       {isOpen && (
         <Dialog open={isOpen} onClose={handleClose} className="relative z-50">
-          {/* Glass Background */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -55,7 +58,6 @@ export default function MerchModal() {
             aria-hidden="true"
           />
 
-          {/* Modal Panel */}
           <div className="fixed inset-0 flex items-center justify-center p-4">
             <motion.div
               initial={{ y: 40, opacity: 0 }}
@@ -64,10 +66,9 @@ export default function MerchModal() {
               transition={{ duration: 0.4, ease: 'easeOut' }}
             >
               <Dialog.Panel
-                    className="relative bg-white/30 backdrop-blur-lg rounded-2xl border border-white/40 shadow-xl max-w-md w-full p-6 text-center space-y-4 text-white"
-                    style={{ fontFamily: 'var(--font-geist-sans)' }}
-                >
-                {/* Image with Animated Price Tag */}
+                className="relative bg-white/30 backdrop-blur-lg rounded-2xl border border-white/40 shadow-xl max-w-md w-full p-6 text-center space-y-4 text-white"
+                style={{ fontFamily: 'var(--font-geist-sans)' }}
+              >
                 <motion.div
                   initial={{ scale: 0.95 }}
                   animate={{ scale: 1 }}
@@ -81,27 +82,23 @@ export default function MerchModal() {
                     height={200}
                     className="rounded-xl object-cover mx-auto border border-white/20"
                   />
-
-                  {/* Price Tag */}
                   <motion.div
                     initial={{ y: -10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
                     className="absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-sm font-bold px-3 py-1 rounded-full shadow-lg"
                   >
-                    {merchData.Merch_Price}
+                    <div><p>Rs.</p>{merchData.Merch_Price}</div>
                   </motion.div>
                 </motion.div>
 
-                {/* Title & Description */}
                 <Dialog.Title className="text-2xl font-extrabold text-white drop-shadow">
-                  IEEE Merch Pack
+                  Our New Merch Pack
                 </Dialog.Title>
                 <p className="text-sm text-white/90">
                   Show your IEEE spirit! Grab our exclusive Student Branch merch pack while stock lasts.
                 </p>
 
-                {/* Buttons */}
                 <div className="flex justify-center gap-4 mt-4">
                   <button
                     onClick={handleClose}

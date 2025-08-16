@@ -24,22 +24,23 @@ export default function Home() {
       <SpeedInsights/>
       {/* Animated circuit background */}
       <AnimatedCircuit />
-
       {/* Floating IEEE logo on the left */}
       <FloatingLogo />
-
       {/* Floating carousel on the right */}
-      <div
-  className="fixed top-1/2 -translate-y-1/2 z-40"
-  style={{ right: '20px' }} // shift 100px outside viewport to show more left side of carousel
+<div
+  className="fixed top-1/2 -translate-y-1/2 z-40 right-5 md:right-20"
 >
-  <FloatingCarousel />
+  <div className="w-[300px] h-[300px] md:w-[520px] md:h-[520px] overflow-hidden">
+    <FloatingCarousel />
+  </div>
 </div>
 
 
+
       {/* Page content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Navbar />
+      <div className="relative z-41 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Navbar /></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-16" />
         <AwardBadge />
         <Hero />
@@ -49,7 +50,8 @@ export default function Home() {
         <Team />
         
       </div>
-      <Footer />
+      <div className="relative z-41">
+      <Footer /></div>
     </main>
   )
 }

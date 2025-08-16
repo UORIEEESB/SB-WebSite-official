@@ -13,7 +13,7 @@ export async function GET() {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.NEWSSPREADSHEET_ID,
-      range: 'Events!A2:D', // Assuming columns: title, date, description, image
+      range: 'Events!A2:E', // Assuming columns: title, date, description, image
     });
 
     const rows = response.data.values || [];
@@ -33,6 +33,7 @@ export async function GET() {
       date: row[1],
       description: row[2],
       image: convertToDirectImageLink(row[3]) || '/images/events.jpg',
+      url:row[4] || '', // Optional URL column
     }));
 
     return NextResponse.json({ events });

@@ -10,7 +10,7 @@ export default function AwardBadge() {
 
   useEffect(() => {
     // Hide after 8 seconds
-    const timer = setTimeout(() => setVisible(false), 8000)
+    const timer = setTimeout(() => setVisible(false), 12000)
     return () => clearTimeout(timer)
   }, [])
 
@@ -46,7 +46,7 @@ export default function AwardBadge() {
           />
 
           {/* Glowing Title */}
-          <motion.div
+          {/*<motion.div
             animate={{
               textShadow: [
                 '0 0 5px rgba(255, 215, 0, 0.6)',
@@ -64,8 +64,8 @@ export default function AwardBadge() {
             <h2 className="text-base md:text-lg font-semibold text-yellow-400 select-none">
               Champion
             </h2>
+          </motion.div>*/}
           </motion.div>
-        </motion.div>
       )}
     </AnimatePresence>
   )
