@@ -1,11 +1,8 @@
 import type { NextConfig } from "next";
 
-const isDev = process.env.NODE_ENV === "development";
-
-// Base CSP
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' ${isDev ? "'unsafe-inline' 'unsafe-eval'" : ""} https://www.google.com https://www.gstatic.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' https://drive.google.com data: https://www.google.com;
   frame-src https://www.google.com;
@@ -15,19 +12,18 @@ const ContentSecurityPolicy = `
   form-action 'self';
 `;
 
-// Security headers
 const securityHeaders = [
   {
     key: "X-Frame-Options",
-    value: "DENY", // prevents clickjacking
+    value: "DENY",
   },
   {
     key: "X-Content-Type-Options",
-    value: "nosniff", // prevents MIME-type sniffing
+    value: "nosniff",
   },
   {
     key: "Referrer-Policy",
-    value: "strict-origin-when-cross-origin", // safer referrer policy
+    value: "strict-origin-when-cross-origin",
   },
   {
     key: "Content-Security-Policy",
@@ -35,16 +31,16 @@ const securityHeaders = [
   },
   {
     key: "Strict-Transport-Security",
-    value: "max-age=63072000; includeSubDomains; preload", // enforce HTTPS
+    value: "max-age=63072000; includeSubDomains; preload",
   },
 ];
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true, // helps catch potential issues
-  poweredByHeader: false, // remove "X-Powered-By: Next.js" header
+  reactStrictMode: true,
+  poweredByHeader: false,
 
   images: {
-    domains: ["drive.google.com"], // only allow trusted domains
+    domains: ["drive.google.com"],
   },
 
   async headers() {
