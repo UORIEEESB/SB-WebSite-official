@@ -1,3 +1,5 @@
+// lib/verifyRecaptcha.ts
+
 interface RecaptchaResponse {
     success: boolean
     score?: number
@@ -16,14 +18,20 @@ interface RecaptchaResponse {
     const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `secret=${secretKey}&response=${token}`,
+      body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(token)}`,
     })
   
     if (!res.ok) {
-      throw new Error("Failed to verify reCAPTCHA with Google")
+      throw new Error(`Failed to verify reCAPTCHA: ${res.statusText}`)
     }
   
-    const data: RecaptchaResponse = await res.json()
-    return data
+    const data: unknown = await res.json()
+  
+    // Runtime type assertion
+    if (typeof data !== "object" || data === null || !("success" in data)) {
+      throw new Error("Invalid response from reCAPTCHA API")
+    }
+  
+    return data as RecaptchaResponse
   }
   
