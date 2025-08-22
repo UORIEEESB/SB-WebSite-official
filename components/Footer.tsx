@@ -80,6 +80,7 @@ export default function Footer() {
             <li><a href="#events" className="hover:text-blue-400 transition">Events</a></li>
             <li><a href="#team" className="hover:text-blue-400 transition">Team</a></li>
             <li><a href="#contact" className="hover:text-blue-400 transition">Contact</a></li>
+            <li><a href="#contact" className="hover:text-blue-400 transition">Brand Toolkit</a></li>
           </ul>
         </div>
 

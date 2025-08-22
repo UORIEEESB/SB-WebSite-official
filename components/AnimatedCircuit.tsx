@@ -3,10 +3,22 @@ import gsap from 'gsap'
 
 export default function AnimatedCircuit() {
   const pathRefs = useRef<SVGPathElement[]>([])
-  const containerRef = useRef<HTMLDivElement>(null) // ← add this
+  const containerRef = useRef<HTMLDivElement>(null)
   const [paths, setPaths] = useState<string[]>([])
   const [pageHeight, setPageHeight] = useState(0)
   const [pageWidth, setPageWidth] = useState(0)
+  const [reducedMotion, setReducedMotion] = useState(false)
+
+  useEffect(() => {
+    // Detect reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReducedMotion(mediaQuery.matches)
+
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mediaQuery.addEventListener('change', handler)
+
+    return () => mediaQuery.removeEventListener('change', handler)
+  }, [])
 
   useEffect(() => {
     function updateSize() {
@@ -64,13 +76,15 @@ export default function AnimatedCircuit() {
       return path
     }
 
-    const numPaths = 400
+    // 📱 Optimize path count for mobile
+    const numPaths = pageWidth < 768 ? 100 : 400
     const generatedPaths = Array.from({ length: numPaths }, generatePath)
     setPaths(generatedPaths)
   }, [pageHeight, pageWidth])
 
   useEffect(() => {
-    if (!paths.length) return
+    if (!paths.length || reducedMotion) return
+
     pathRefs.current.forEach((path, i) => {
       gsap.fromTo(
         path,
@@ -80,11 +94,11 @@ export default function AnimatedCircuit() {
           duration: 5 + (i % 4),
           repeat: -1,
           ease: 'power1.inOut',
-          delay: i * 0.25,
+          delay: pageWidth < 768 ? i * 0.5 : i * 0.25, // 📱 slower stagger on mobile
         }
       )
     })
-  }, [paths])
+  }, [paths, reducedMotion, pageWidth])
 
   if (!pageHeight || !pageWidth) return null
 
@@ -107,8 +121,8 @@ export default function AnimatedCircuit() {
             }}
             d={d}
             stroke="#0ff"
-            strokeWidth="1"
-            opacity="0.15"
+            strokeWidth={pageWidth < 768 ? "0.5" : "1"}
+            opacity={pageWidth < 768 ? "0.1" : "0.15"}
             className="drop-shadow-[0_0_4px_#0ff]"
             fill="none"
           />

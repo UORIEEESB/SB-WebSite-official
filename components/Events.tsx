@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -13,6 +13,8 @@ type Event = {
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([])
+  const trackRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     async function fetchEvents() {
@@ -24,12 +26,31 @@ export default function Events() {
         console.error('Failed to fetch events:', error)
       }
     }
-
     fetchEvents()
+  }, [])
+
+  // Pause marquee when not in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (trackRef.current) {
+          trackRef.current.style.animationPlayState = entries[0].isIntersecting
+            ? 'running'
+            : 'paused'
+        }
+      },
+      { threshold: 0.2 }
+    )
+
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+    }
   }, [])
 
   return (
     <section
+      ref={sectionRef}
       id="events"
       className="max-w-7xl mx-auto px-6 sm:px-10 py-20 text-white overflow-hidden"
     >
@@ -41,7 +62,7 @@ export default function Events() {
 
       {/* Horizontal Scroll Marquee */}
       <div className="relative overflow-hidden">
-        <div className="marquee-track flex gap-6 w-max">
+        <div ref={trackRef} className="marquee-track flex gap-6 w-max">
           {[...events, ...events].map(({ title, date, description, image }, index) => (
             <div
               key={index}
@@ -68,6 +89,7 @@ export default function Events() {
         <style jsx>{`
           .marquee-track {
             animation: scroll-left 60s linear infinite;
+            animation-play-state: running; /* default */
           }
 
           @keyframes scroll-left {
