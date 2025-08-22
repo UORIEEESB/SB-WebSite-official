@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [form, setForm] = useState({
@@ -16,27 +15,24 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
 
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async () => {
-    if (!captchaToken) {
-      alert('Please complete the reCAPTCHA')
-      return
-    }
-
     setLoading(true)
     try {
       const res = await fetch('/api/Contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, captcha: captchaToken }),
+        body: JSON.stringify(form),
       })
 
-      const data = await res.json()
+      const text = await res.text()
+      console.log('Response:', text)
+
+      const data = JSON.parse(text)
       if (!res.ok) throw new Error(data?.message || 'Submission failed')
 
       setSubmitted(true)
@@ -58,7 +54,6 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
       message: '',
     })
     setSubmitted(false)
-    setCaptchaToken(null)
   }
 
   return (
@@ -68,6 +63,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
     >
       <Dialog.Panel className="relative bg-white p-5 rounded-2xl max-w-sm w-full shadow-lg ring-1 ring-gray-200">
+        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
@@ -90,8 +86,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
           </div>
         ) : (
           <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-4 text-gray-700 text-sm">
-            {/* Inputs */}
-            {[ 
+            {[
               { label: 'Name', name: 'name', type: 'text' },
               { label: 'Email', name: 'email', type: 'email' },
               { label: 'Contact No', name: 'contact', type: 'text' },
@@ -111,7 +106,6 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
               </label>
             ))}
 
-            {/* Message */}
             <label className="flex flex-col">
               <span className="mb-1 font-medium">Message</span>
               <textarea
@@ -124,14 +118,6 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
               />
             </label>
 
-            {/* reCAPTCHA */}
-            <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-              onChange={(token) => setCaptchaToken(token)}
-              className="mt-2"
-            />
-
-            {/* Submit */}
             <button
               type="button"
               disabled={loading}
