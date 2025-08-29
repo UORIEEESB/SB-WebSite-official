@@ -53,7 +53,7 @@ export default function Team() {
       id="team"
       className="max-w-7xl mx-auto px-6 sm:px-10 py-20 text-white"
     >
-      <h2 className="text-4xl font-extrabold mb-12 text-center">Meet the Team</h2>
+      <h2 className="text-4xl font-extrabold mb-12 text-center">Executive Committee</h2>
 
       <div className="overflow-hidden">
         <motion.div className="flex gap-12 w-max" animate={controls}>
@@ -72,7 +72,7 @@ export default function Team() {
                 />
               </div>
               <h3 className="text-lg font-semibold whitespace-nowrap">{name}</h3>
-              <p className="text-blue-400 whitespace-nowrap">{role}</p>
+              <p className="text-blue-300 whitespace-nowrap">{role}</p>
             </div>
           ))}
         </motion.div>

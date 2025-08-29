@@ -16,11 +16,17 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 export default function Home() {
   return (
     <main
-      className="relative overflow-hidden min-h-screen"
-      style={{
-        background: `radial-gradient(circle at 25% 35%, #00629B 0%, #00497A 40%, #00325B 70%, #001F33 90%)`,
-      }}
-    >
+  className="relative overflow-hidden min-h-screen"
+  style={{
+    background: `radial-gradient(
+      circle at 25% 35%, 
+      #005A9D 0%,    
+      #004081 35%,  
+      #002B5D 65%,   
+      #001834 90%    
+    )`,
+  }}
+>
       <SpeedInsights/>
       {/* Animated circuit background */}
       <AnimatedCircuit />

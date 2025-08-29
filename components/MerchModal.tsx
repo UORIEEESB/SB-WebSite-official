@@ -13,6 +13,7 @@ interface HomepageData {
 
 export default function MerchModal() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isMerchAvailable, setIsMerchAvailable] = useState(false)
   const [merchData, setMerchData] = useState<HomepageData | null>(null)
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function MerchModal() {
         const res = await fetch('/api/HomePageContent')
         const data = await res.json()
         setMerchData(data.homepageData)
+        setIsMerchAvailable(!!data.homepageData?.Merch_Img)
       } catch (error) {
         console.error('Failed to fetch merch data', error)
       }
@@ -48,7 +50,7 @@ export default function MerchModal() {
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isOpen && isMerchAvailable && (
         <Dialog open={isOpen} onClose={handleClose} className="relative z-50">
           <motion.div
             initial={{ opacity: 0 }}

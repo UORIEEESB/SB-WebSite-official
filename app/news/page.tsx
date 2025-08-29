@@ -77,7 +77,7 @@ export default function NewsPage() {
           <button
             onClick={() => { setYearFilter('all'); setCurrentPage(1) }}
             className={`px-4 py-2 rounded-full border ${
-              yearFilter === 'all' ? 'bg-blue-600 text-white' : 'border-blue-600 text-blue-300'
+              yearFilter === 'all' ? 'bg-blue-700 text-white' : 'border-blue-600 text-blue-300'
             }`}
           >
             All Years
@@ -87,7 +87,7 @@ export default function NewsPage() {
               key={year}
               onClick={() => { setYearFilter(year); setCurrentPage(1) }}
               className={`px-4 py-2 rounded-full border ${
-                yearFilter === year ? 'bg-blue-600 text-white' : 'border-blue-600 text-blue-300'
+                yearFilter === year ? 'bg-blue-700 text-white' : 'border-blue-600 text-blue-300'
               }`}
             >
               {year}
@@ -107,7 +107,7 @@ export default function NewsPage() {
               {paginatedEvents.map((event, index) => (
                 <div
                   key={index}
-                  className="flex flex-col md:flex-row bg-neutral-800 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-600 transition-shadow"
+                  className="flex flex-col md:flex-row bg-neutral-800 rounded-xl overflow-hidden shadow-lg hover:shadow-blue-700 transition-shadow"
                 >
                   <div className="relative w-full md:w-1/3 h-60 md:h-auto">
                     <Image
@@ -139,8 +139,8 @@ export default function NewsPage() {
                     onClick={() => setCurrentPage(i + 1)}
                     className={`w-10 h-10 rounded-full border text-sm ${
                       currentPage === i + 1
-                        ? 'bg-blue-600 text-white'
-                        : 'border-blue-600 text-blue-300'
+                        ? 'bg-blue-700 text-white'
+                        : 'border-blue-700 text-blue-300'
                     }`}
                   >
                     {i + 1}

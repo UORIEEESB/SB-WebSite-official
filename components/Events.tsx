@@ -54,12 +54,14 @@ export default function Events() {
       id="events"
       className="max-w-7xl mx-auto px-6 sm:px-10 py-20 text-white overflow-hidden"
     >
-      <Link href="/news">
-        <h2 className="text-4xl font-extrabold mb-12 text-center hover:underline cursor-pointer">
-          News & Events
-        </h2>
+      <div className="flex justify-center">
+      <Link
+        href="/news"
+        className="text-4xl font-extrabold mb-12 text-center text-white transition-all duration-300 hover:text-blue-400 hover:drop-shadow-[0_0_8px_#3b82f6]"
+      >
+        News & Events
       </Link>
-
+    </div>
       {/* Horizontal Scroll Marquee */}
       <div className="relative overflow-hidden">
         <div ref={trackRef} className="marquee-track flex gap-6 w-max">

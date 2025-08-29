@@ -9,6 +9,12 @@ export default function SBTimeline() {
   >([]);
   const trackRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const [selectedItem, setSelectedItem] = useState<null | {
+    image: string;
+    title: string;
+    description: string;
+    date: string;
+  }>(null);
 
   useEffect(() => {
     async function fetchTimeline() {
@@ -23,29 +29,32 @@ export default function SBTimeline() {
     fetchTimeline();
   }, []);
 
-  // IntersectionObserver to pause marquee when off-screen
+  // Pause marquee when off-screen
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (trackRef.current) {
-          if (entries[0].isIntersecting) {
-            trackRef.current.style.animationPlayState = 'running';
-          } else {
-            trackRef.current.style.animationPlayState = 'paused';
-          }
+          trackRef.current.style.animationPlayState = entries[0].isIntersecting
+            ? 'running'
+            : 'paused';
         }
       },
       { threshold: 0.2 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => {
       if (sectionRef.current) observer.unobserve(sectionRef.current);
     };
   }, []);
+
+  // Pause marquee on hover/touch
+  const pauseMarquee = () => {
+    if (trackRef.current) trackRef.current.style.animationPlayState = 'paused';
+  };
+  const resumeMarquee = () => {
+    if (trackRef.current) trackRef.current.style.animationPlayState = 'running';
+  };
 
   return (
     <section
@@ -62,16 +71,26 @@ export default function SBTimeline() {
       {/* Glowing beam */}
       <div className="absolute top-1/2 left-0 w-full h-1 bg-blue-500 shadow-[0_0_20px_#3b82f6] z-0" />
 
-      {/* Marquee container */}
-      <div className="relative z-10 overflow-hidden">
-        <div ref={trackRef} className="marquee-track flex gap-8 w-max">
+      {/* Timeline container */}
+      <div
+        className="relative z-10 overflow-x-auto scrollbar-hide"
+        onMouseEnter={pauseMarquee}
+        onMouseLeave={resumeMarquee}
+        onTouchStart={pauseMarquee}
+        onTouchEnd={resumeMarquee}
+      >
+        <div
+          ref={trackRef}
+          className="marquee-track flex gap-8 w-max snap-x snap-mandatory"
+        >
           {[...timelineItems, ...timelineItems].map((item, i) => (
             <div
               key={i}
-              className="relative w-60 h-80 rounded-xl overflow-hidden shadow-xl border border-blue-500 bg-black bg-opacity-60 flex flex-col"
+              onClick={() => setSelectedItem(item)}
+              className="relative w-60 h-80 flex-shrink-0 snap-center cursor-pointer rounded-xl overflow-hidden shadow-xl border border-blue-500 bg-black bg-opacity-60 flex flex-col hover:scale-105 transition-transform duration-300"
             >
-              {/* Image Section */}
-              <div className="relative flex-grow w-full">
+              {/* Image */}
+              <div className="relative w-full h-40">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -80,22 +99,65 @@ export default function SBTimeline() {
                 />
               </div>
 
-              {/* Text Box */}
-              <div className="p-3 bg-gradient-to-t from-black/80 to-transparent text-white rounded-b-xl backdrop-blur-sm flex flex-col justify-between space-y-1">
-                <h3 className="text-lg font-bold">{item.title}</h3>
-                <p className="text-sm text-gray-300">{item.description}</p>
-                <span className="text-xs text-blue-400 mt-1">{item.date}</span>
+              {/* Text */}
+              <div className="p-3 flex flex-col justify-between space-y-1 bg-gradient-to-t from-black/80 to-transparent text-white">
+                <h3 className="text-lg font-bold line-clamp-2">{item.title}</h3>
+                <p className="text-sm text-gray-300 line-clamp-3">{item.description}</p>
+                <span className="text-xs text-blue-400">{item.date}</span>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Inline styles for animation */}
+      {/* Modal */}
+      {selectedItem && (
+        <div
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex justify-center items-center p-4"
+          onClick={() => setSelectedItem(null)}
+        >
+          <div
+            className="relative bg-[#0A1A2F]/80 backdrop-blur-xl rounded-2xl shadow-2xl p-6 max-w-lg w-full transform transition-all duration-300 scale-100 hover:scale-[1.01] border border-blue-500/30"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Image */}
+            <div className="relative w-full h-60 rounded-lg overflow-hidden mb-4">
+              <Image
+                src={selectedItem.image}
+                alt={selectedItem.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Content */}
+            <h3 className="text-xl font-bold mb-2 text-white">{selectedItem.title}</h3>
+            <p className="text-sm text-gray-300 mb-2">{selectedItem.date}</p>
+            <div className="text-gray-200 text-sm max-h-60 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent">
+              {selectedItem.description}
+            </div>
+            {/* Close button */}
+            <div className='flex justify-center px-4 py-4'>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedItem(null);
+              }}
+              className=" text-white hover:text-blue-300"
+            >
+              Close
+            </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Styles */}
       <style jsx>{`
         .marquee-track {
           animation: scroll-left 40s linear infinite;
-          animation-play-state: running; /* default */
+          animation-play-state: running;
         }
 
         @keyframes scroll-left {
@@ -105,6 +167,14 @@ export default function SBTimeline() {
           100% {
             transform: translateX(-50%);
           }
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </section>
