@@ -14,21 +14,25 @@ interface TeamProps {
   onLoad?: () => void
 }
 
-export default function Team( { onLoad }: TeamProps) {
+export default function Team({ onLoad }: TeamProps) {
   const [teamMembers, setTeamMembers] = useState<Member[]>([])
   const controls = useAnimation()
   const sectionRef = useRef<HTMLElement>(null)
 
+  // Fetch team data
   useEffect(() => {
     fetch('/api/OurTeam')
       .then((res) => res.json())
       .then((data) => setTeamMembers(data.teamMembers || []))
       .catch((err) => console.error('Failed to fetch team:', err))
       .finally(() => onLoad?.())
-  }, [])
+  }, [onLoad]) // ✅ include onLoad in deps
 
   // Intersection Observer to pause animation off-screen
   useEffect(() => {
+    const currentSection = sectionRef.current
+    if (!currentSection) return
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -37,18 +41,16 @@ export default function Team( { onLoad }: TeamProps) {
             transition: { duration: 60, repeat: Infinity, ease: 'linear' },
           })
         } else {
-          controls.stop() // pause animation when out of view
+          controls.stop()
         }
       },
       { threshold: 0.2 }
     )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
+    observer.observe(currentSection)
 
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      observer.unobserve(currentSection) // use cached ref
     }
   }, [controls])
 
@@ -63,10 +65,7 @@ export default function Team( { onLoad }: TeamProps) {
       <div className="overflow-hidden">
         <motion.div className="flex gap-12 w-max" animate={controls}>
           {[...teamMembers, ...teamMembers].map(({ name, role, photo }, index) => (
-            <div
-              key={`${name}-${index}`}
-              className="flex flex-col items-center space-y-3"
-            >
+            <div key={`${name}-${index}`} className="flex flex-col items-center space-y-3">
               <div className="relative w-32 h-32 rounded-full overflow-hidden shadow-lg shadow-blue-600/50">
                 <Image
                   src={photo}

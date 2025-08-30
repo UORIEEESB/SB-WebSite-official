@@ -13,6 +13,7 @@ export default function PromotionBanner({ onLoad }: PromotionBannerProps) {
   const [promoLink, setPromoLink] = useState<string | null>(null)
   const [visible, setVisible] = useState(true)
 
+  // Fetch promo banner
   useEffect(() => {
     const fetchPromoBanner = async () => {
       try {
@@ -29,11 +30,12 @@ export default function PromotionBanner({ onLoad }: PromotionBannerProps) {
     }
 
     fetchPromoBanner()
-  }, [])
+  }, [onLoad]) // ✅ add onLoad to dependencies
 
+  // Hide banner after 15 seconds
   useEffect(() => {
     if (promoBanner) {
-      const timer = setTimeout(() => setVisible(false), 15000) // 15 seconds
+      const timer = setTimeout(() => setVisible(false), 15000)
       return () => clearTimeout(timer)
     }
   }, [promoBanner])

@@ -16,11 +16,12 @@ interface EventsProps {
   onLoad?: () => void
 }
 
-export default function Events( { onLoad }: EventsProps) {
+export default function Events({ onLoad }: EventsProps) {
   const [events, setEvents] = useState<Event[]>([])
   const trackRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
+  // Fetch events data
   useEffect(() => {
     async function fetchEvents() {
       try {
@@ -35,10 +36,13 @@ export default function Events( { onLoad }: EventsProps) {
       }
     }
     fetchEvents()
-  }, [])
+  }, [onLoad]) // include onLoad
 
   // Pause marquee when not in view
   useEffect(() => {
+    const currentSection = sectionRef.current
+    if (!currentSection) return
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (trackRef.current) {
@@ -50,9 +54,9 @@ export default function Events( { onLoad }: EventsProps) {
       { threshold: 0.2 }
     )
 
-    if (sectionRef.current) observer.observe(sectionRef.current)
+    observer.observe(currentSection)
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      observer.unobserve(currentSection) // use cached ref
     }
   }, [])
 
@@ -63,13 +67,14 @@ export default function Events( { onLoad }: EventsProps) {
       className="max-w-7xl mx-auto px-6 sm:px-10 py-20 text-white overflow-hidden"
     >
       <div className="flex justify-center">
-      <Link
-        href="/news"
-        className="text-4xl font-extrabold mb-12 text-center text-white transition-all duration-300 hover:text-blue-400 hover:drop-shadow-[0_0_8px_#3b82f6]"
-      >
-        News & Events
-      </Link>
-    </div>
+        <Link
+          href="/news"
+          className="text-4xl font-extrabold mb-12 text-center text-white transition-all duration-300 hover:text-blue-400 hover:drop-shadow-[0_0_8px_#3b82f6]"
+        >
+          News & Events
+        </Link>
+      </div>
+
       {/* Horizontal Scroll Marquee */}
       <div className="relative overflow-hidden">
         <div ref={trackRef} className="marquee-track flex gap-6 w-max">
@@ -89,7 +94,7 @@ export default function Events( { onLoad }: EventsProps) {
               </div>
               <div className="p-6 text-white">
                 <a href={url} target="_blank" rel="noopener noreferrer">
-                <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                  <h3 className="text-xl font-semibold mb-2">{title}</h3>
                 </a>
                 <p className="text-sm text-blue-400 mb-3">{date}</p>
                 <p className="text-sm text-gray-200">{description}</p>
@@ -101,7 +106,7 @@ export default function Events( { onLoad }: EventsProps) {
         <style jsx>{`
           .marquee-track {
             animation: scroll-left 100s linear infinite;
-            animation-play-state: running; /* default */
+            animation-play-state: running;
           }
 
           @keyframes scroll-left {

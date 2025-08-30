@@ -6,7 +6,7 @@ interface HeroContent {
   onLoad?: () => void
 }
 
-export default function Hero( { onLoad }: HeroContent) {
+export default function Hero({ onLoad }: HeroContent) {
   const [heroTitle, setHeroTitle] = useState('Empowering Engineering Excellence')
   const [heroParagraph, setHeroParagraph] = useState(
     "Welcome to the IEEE Student Branch of the University of Ruhuna! We are a vibrant community of passionate students dedicated to innovation, technology, and professional growth. As part of the world's largest technical professional organization, our branch provides a dynamic platform for students to engage in hands-on projects, technical workshops, leadership development, and global networking opportunities. We strive to empower future engineers and technologists by fostering a culture of creativity, collaboration, and continuous learning. Whether you're looking to expand your knowledge, connect with industry leaders, or make an impact through technology, you'll find your place here with us."
@@ -27,7 +27,7 @@ export default function Hero( { onLoad }: HeroContent) {
     }
 
     fetchHeroContent()
-  }, [])
+  }, [onLoad]) // ✅ include onLoad in dependencies
 
   return (
     <section

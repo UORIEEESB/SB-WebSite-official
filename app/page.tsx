@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useLoading } from '@/contexts/LoadingContext'
 import Hero from "@/components/Hero"
 import Navbar from "@/components/Navbar"
@@ -18,7 +18,7 @@ import PromotionBanner from "@/components/PromotionBanner"
 import LoaderAnimation from "@/components/LoaderAnimation"
 
 export default function Home() {
-  const { isAppLoading, setAppLoading } = useLoading()
+  const { setAppLoading } = useLoading() // Remove isAppLoading since it's not used
   const [loading, setLoading] = useState(true)
   const [showContent, setShowContent] = useState(false)
   const [componentsLoaded, setComponentsLoaded] = useState({
@@ -30,6 +30,31 @@ export default function Home() {
     team: false,
   })
 
+  // Memoize onLoad callbacks to prevent unnecessary re-renders
+  const handlePromotionLoad = useCallback(() => {
+    setComponentsLoaded(prev => ({ ...prev, promotion: true }))
+  }, [])
+
+  const handleAwardLoad = useCallback(() => {
+    setComponentsLoaded(prev => ({ ...prev, award: true }))
+  }, [])
+
+  const handleHeroLoad = useCallback(() => {
+    setComponentsLoaded(prev => ({ ...prev, hero: true }))
+  }, [])
+
+  const handleEventsLoad = useCallback(() => {
+    setComponentsLoaded(prev => ({ ...prev, events: true }))
+  }, [])
+
+  const handleTimelineLoad = useCallback(() => {
+    setComponentsLoaded(prev => ({ ...prev, timeline: true }))
+  }, [])
+
+  const handleTeamLoad = useCallback(() => {
+    setComponentsLoaded(prev => ({ ...prev, team: true }))
+  }, [])
+
   // When all components are loaded, start exit animation
   useEffect(() => {
     if (Object.values(componentsLoaded).every(Boolean)) {
@@ -38,11 +63,11 @@ export default function Home() {
   }, [componentsLoaded])
 
   // Show content after loader animation completes
-  const handleAnimationComplete = () => {
+  const handleAnimationComplete = useCallback(() => {
     setShowContent(true)
     // Notify the app that loading is complete
     setAppLoading(false)
-  }
+  }, [setAppLoading])
 
   return (
     <main
@@ -82,14 +107,14 @@ export default function Home() {
         </div>
 
         {/* Components that fetch data */}
-        <PromotionBanner onLoad={() => setComponentsLoaded(prev => ({ ...prev, promotion: true }))} />
+        <PromotionBanner onLoad={handlePromotionLoad} />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AwardBadge onLoad={() => setComponentsLoaded(prev => ({ ...prev, award: true }))} />
-          <Hero onLoad={() => setComponentsLoaded(prev => ({ ...prev, hero: true }))} />
+          <AwardBadge onLoad={handleAwardLoad} />
+          <Hero onLoad={handleHeroLoad} />
           <About />
-          <Events onLoad={() => setComponentsLoaded(prev => ({ ...prev, events: true }))}/>
-          <SBTimeline onLoad={() => setComponentsLoaded(prev => ({ ...prev, timeline: true }))} />
-          <Team onLoad={() => setComponentsLoaded(prev => ({ ...prev, team: true }))}/>
+          <Events onLoad={handleEventsLoad}/>
+          <SBTimeline onLoad={handleTimelineLoad} />
+          <Team onLoad={handleTeamLoad}/>
         </div>
 
         <div className="relative z-41">

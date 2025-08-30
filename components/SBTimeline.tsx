@@ -7,7 +7,7 @@ interface SBTimelineProps {
   onLoad?: () => void;
 }
 
-export default function SBTimeline( { onLoad }: SBTimelineProps) {
+export default function SBTimeline({ onLoad }: SBTimelineProps) {
   const [timelineItems, setTimelineItems] = useState<
     { image: string; title: string; description: string; date: string }[]
   >([]);
@@ -37,7 +37,7 @@ export default function SBTimeline( { onLoad }: SBTimelineProps) {
       }
     }
     fetchTimeline();
-  }, []);
+  }, [onLoad]); // ✅ include onLoad in deps
 
   // Adjust scroll speed based on screen size
   useEffect(() => {
@@ -55,6 +55,9 @@ export default function SBTimeline( { onLoad }: SBTimelineProps) {
 
   // Pause marquee when off-screen
   useEffect(() => {
+    const currentSection = sectionRef.current;
+    if (!currentSection) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (trackRef.current) {
@@ -66,9 +69,10 @@ export default function SBTimeline( { onLoad }: SBTimelineProps) {
       { threshold: 0.2 }
     );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    observer.observe(currentSection);
+
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
+      observer.unobserve(currentSection); // ✅ use cached ref
     };
   }, []);
 

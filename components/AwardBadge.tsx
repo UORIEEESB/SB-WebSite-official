@@ -12,12 +12,13 @@ export default function AwardBadge({ onLoad }: AwardBadgeProps) {
   const [visible, setVisible] = useState(true)
   const [awardImage, setAwardImage] = useState<string | null>(null)
 
+  // Hide after 12 seconds
   useEffect(() => {
-    // Hide after 8 seconds
     const timer = setTimeout(() => setVisible(false), 12000)
     return () => clearTimeout(timer)
   }, [])
 
+  // Fetch award image
   useEffect(() => {
     const fetchAward = async () => {
       try {
@@ -32,7 +33,7 @@ export default function AwardBadge({ onLoad }: AwardBadgeProps) {
       }
     }
     fetchAward()
-  }, [])
+  }, [onLoad]) // add onLoad to dependencies
 
   return (
     <AnimatePresence>
@@ -44,35 +45,13 @@ export default function AwardBadge({ onLoad }: AwardBadgeProps) {
           transition={{ duration: 1 }}
           className="fixed bottom-4 left-4 z-50 w-64 h-40 md:w-80 md:h-52"
         >
-          {/* Podium Image */}
           <Image
             src={awardImage}
             alt="Award"
             fill
             className="object-contain"
           />
-
-          {/* Glowing Title */}
-          {/*<motion.div
-            animate={{
-              textShadow: [
-                '0 0 5px rgba(255, 215, 0, 0.6)',
-                '0 0 15px rgba(255, 215, 0, 1)',
-                '0 0 5px rgba(255, 215, 0, 0.6)',
-              ],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 2.5,
-              ease: 'easeInOut',
-            }}
-            className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 text-center"
-          >
-            <h2 className="text-base md:text-lg font-semibold text-yellow-400 select-none">
-              Champion
-            </h2>
-          </motion.div>*/}
-          </motion.div>
+        </motion.div>
       )}
     </AnimatePresence>
   )
