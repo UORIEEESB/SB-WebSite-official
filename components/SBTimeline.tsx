@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
+import { motion, useAnimation } from 'framer-motion';
 
 interface SBTimelineProps {
   onLoad?: () => void;
@@ -11,18 +12,18 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
   const [timelineItems, setTimelineItems] = useState<
     { image: string; title: string; description: string; date: string }[]
   >([]);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
   const sectionRef = useRef<HTMLElement>(null);
+  const [animationDuration, setAnimationDuration] = useState(80); // seconds
+  const resumeTimeout = useRef<NodeJS.Timeout | null>(null);
   const [selectedItem, setSelectedItem] = useState<null | {
     image: string;
     title: string;
     description: string;
     date: string;
   }>(null);
-  const [animationDuration, setAnimationDuration] = useState('80s');
-  const resumeTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  // Fetch data
+  // Fetch timeline data
   useEffect(() => {
     async function fetchTimeline() {
       try {
@@ -30,64 +31,56 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
         const data = await res.json();
         setTimelineItems(data.timelineItems);
         onLoad?.();
-      } catch (error) {
-        console.error('Failed to fetch timeline data:', error);
+      } catch (err) {
+        console.error('Failed to fetch timeline data:', err);
         setTimelineItems([]);
         onLoad?.();
       }
     }
     fetchTimeline();
-  }, [onLoad]); // ✅ include onLoad in deps
+  }, [onLoad]);
 
-  // Adjust scroll speed based on screen size
+  // Adjust speed for mobile
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setAnimationDuration('160s'); // Slower for mobile
-      } else {
-        setAnimationDuration('80s'); // Normal for desktop
-      }
+      setAnimationDuration(window.innerWidth < 768 ? 160 : 80);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Pause marquee when off-screen
+  // IntersectionObserver to pause animation off-screen
   useEffect(() => {
     const currentSection = sectionRef.current;
     if (!currentSection) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (trackRef.current) {
-          trackRef.current.style.animationPlayState = entries[0].isIntersecting
-            ? 'running'
-            : 'paused';
+        if (entries[0].isIntersecting) {
+          controls.start({ x: ['0%', '-50%'], transition: { duration: animationDuration, ease: 'linear', repeat: Infinity } });
+        } else {
+          controls.stop();
         }
       },
       { threshold: 0.2 }
     );
 
     observer.observe(currentSection);
+    return () => observer.unobserve(currentSection);
+  }, [controls, animationDuration]);
 
-    return () => {
-      observer.unobserve(currentSection); // ✅ use cached ref
-    };
-  }, []);
-
-  // Functions to pause/resume with delay
-  const pauseMarquee = () => {
-    if (trackRef.current) trackRef.current.style.animationPlayState = 'paused';
+  const pauseMarquee = useCallback(() => {
+    controls.stop();
     if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
-  };
+  }, [controls]);
 
-  const resumeMarquee = () => {
+  const resumeMarquee = useCallback(() => {
     if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
     resumeTimeout.current = setTimeout(() => {
-      if (trackRef.current) trackRef.current.style.animationPlayState = 'running';
-    }, 2000); // resume after 2s
-  };
+      controls.start({ x: ['0%', '-50%'], transition: { duration: animationDuration, ease: 'linear', repeat: Infinity } });
+    }, 2000);
+  }, [controls, animationDuration]);
 
   return (
     <section
@@ -95,10 +88,7 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
       id="sb-timeline"
       className="relative py-24 bg-[#001F33]/60 rounded-3xl backdrop-blur-md overflow-hidden mx-4 md:mx-12"
     >
-      {/* Heading */}
-      <h2 className="text-center text-white text-4xl font-bold mb-4">
-        Our Journey
-      </h2>
+      <h2 className="text-center text-white text-4xl font-bold mb-4">Our Journey</h2>
       <p className="text-center text-gray-300 max-w-2xl mx-auto mb-12 text-lg">
         Highlights of our milestones and achievements over the years.
       </p>
@@ -108,28 +98,23 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
 
       {/* Timeline container */}
       <div
-        className="relative z-10 overflow-x-auto scrollbar-hide"
-        onMouseDown={pauseMarquee}
-        onMouseUp={resumeMarquee}
-        onTouchStart={pauseMarquee}
-        onTouchEnd={resumeMarquee}
+        className="relative z-10 w-full overflow-hidden"
         onMouseEnter={pauseMarquee}
         onMouseLeave={resumeMarquee}
+        onTouchStart={pauseMarquee}
+        onTouchEnd={resumeMarquee}
       >
-        <div
-          ref={trackRef}
-          className="marquee-track flex gap-8 w-max snap-x snap-mandatory"
-          style={{
-            animationDuration: animationDuration,
-          }}
+        <motion.div
+          className="flex gap-8 w-max"
+          animate={controls}
+          style={{ x: '0%' }}
         >
           {[...timelineItems, ...timelineItems].map((item, i) => (
             <div
               key={i}
               onClick={() => setSelectedItem(item)}
-              className="relative w-60 h-80 flex-shrink-0 snap-center cursor-pointer rounded-xl overflow-hidden shadow-xl border border-blue-500 bg-black bg-opacity-60 flex flex-col hover:scale-105 transition-transform duration-300"
+              className="relative w-60 h-80 flex-shrink-0 cursor-pointer rounded-xl overflow-hidden shadow-xl border border-blue-500 bg-black bg-opacity-60 flex flex-col hover:scale-105 transition-transform duration-300"
             >
-              {/* Image */}
               <div className="relative w-full h-40">
                 <Image
                   src={item.image}
@@ -138,18 +123,14 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
                   className="object-cover"
                 />
               </div>
-
-              {/* Text */}
               <div className="p-3 flex flex-col justify-between space-y-1 bg-gradient-to-t from-black/80 to-transparent text-white">
                 <h3 className="text-lg font-bold line-clamp-2">{item.title}</h3>
-                <p className="text-sm text-gray-300 line-clamp-3">
-                  {item.description}
-                </p>
+                <p className="text-sm text-gray-300 line-clamp-3">{item.description}</p>
                 <span className="text-xs text-blue-400">{item.date}</span>
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Modal */}
@@ -190,31 +171,6 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
           </div>
         </div>
       )}
-
-      {/* Styles */}
-      <style jsx>{`
-        .marquee-track {
-          animation: scroll-left linear infinite;
-          animation-play-state: running;
-        }
-
-        @keyframes scroll-left {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 }
