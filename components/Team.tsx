@@ -10,7 +10,11 @@ type Member = {
   photo: string
 }
 
-export default function Team() {
+interface TeamProps {
+  onLoad?: () => void
+}
+
+export default function Team( { onLoad }: TeamProps) {
   const [teamMembers, setTeamMembers] = useState<Member[]>([])
   const controls = useAnimation()
   const sectionRef = useRef<HTMLElement>(null)
@@ -20,6 +24,7 @@ export default function Team() {
       .then((res) => res.json())
       .then((data) => setTeamMembers(data.teamMembers || []))
       .catch((err) => console.error('Failed to fetch team:', err))
+      .finally(() => onLoad?.())
   }, [])
 
   // Intersection Observer to pause animation off-screen

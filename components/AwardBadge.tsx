@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
-export default function AwardBadge() {
+interface AwardBadgeProps {
+  onLoad?: () => void
+}
+
+export default function AwardBadge({ onLoad }: AwardBadgeProps) {
   const [visible, setVisible] = useState(true)
   const [awardImage, setAwardImage] = useState<string | null>(null)
 
@@ -20,8 +24,11 @@ export default function AwardBadge() {
         const res = await fetch('/api/HomePageContent')
         const { homepageData } = await res.json()
         setAwardImage(homepageData?.Award_Image)
+        onLoad?.()
       } catch (err) {
         console.error('Failed to fetch award image:', err)
+        setAwardImage(null)
+        onLoad?.()
       }
     }
     fetchAward()

@@ -13,7 +13,7 @@ export async function GET() {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.HOMEPAGE_SPREADSHEET_ID,
-      range: 'About!A2:Y2', // includes all existing + footer fields
+      range: 'About!A2:AA2', // includes all existing + footer fields
     })
 
     const row = response.data.values?.[0]
@@ -39,7 +39,7 @@ export async function GET() {
       'Email',              // N
       'Phone',              // O
       'Facebook',           // P
-      'Youtube',            // Q ✅
+      'Youtube',            // Q 
       'Twitter',            // R
       'Linkedin',           // S
       'Merch_Img',          // T
@@ -48,6 +48,8 @@ export async function GET() {
       'Join_Link',          // W
       'Contact_link',       // X
       'Award_Image',        // Y
+      'Promo_Banner',
+      'Promo_Link'
     ]
 
     const homepageData: Record<string, string> = {}
@@ -64,6 +66,7 @@ export async function GET() {
       'Animation_img_5',
       'Merch_Img',
       'Award_Image',
+      'Promo_Banner',
     ]
 
     driveImageKeys.forEach((key) => {

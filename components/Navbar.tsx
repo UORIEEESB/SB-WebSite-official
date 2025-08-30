@@ -44,7 +44,7 @@ export default function Navbar() {
             onMouseLeave={() => setDropdownOpen(false)}
           >
             <button className="hover:text-blue-500 transition flex items-center gap-1">
-              Sub Chapters ▾
+              Chapters ▾
             </button>
             {isDropdownOpen && (
               <ul className="absolute top-full mt-2 bg-white text-black rounded shadow-lg py-2 w-48 z-50">

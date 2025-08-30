@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLoading } from '@/contexts/LoadingContext'
 
 interface HomepageData {
   Merch_Img: string
@@ -12,6 +13,7 @@ interface HomepageData {
 }
 
 export default function MerchModal() {
+  const { isAppLoading } = useLoading()
   const [isOpen, setIsOpen] = useState(false)
   const [isMerchAvailable, setIsMerchAvailable] = useState(false)
   const [merchData, setMerchData] = useState<HomepageData | null>(null)
@@ -29,24 +31,30 @@ export default function MerchModal() {
     }
 
     fetchData()
-
-    // Open the modal after 1 second
-    const openTimeout = setTimeout(() => setIsOpen(true), 1000)
-
-    // Auto-close after 8 seconds
-    const closeTimeout = setTimeout(() => setIsOpen(false), 10000)
-
-    return () => {
-      clearTimeout(openTimeout)
-      clearTimeout(closeTimeout)
-    }
   }, [])
+
+  // Only start the modal timers after app loading is complete
+  useEffect(() => {
+    if (!isAppLoading && isMerchAvailable && merchData) {
+      // Open the modal after 2 seconds once loading is complete
+      const openTimeout = setTimeout(() => setIsOpen(true), 2000)
+
+      // Auto-close after 10 seconds from when it opens
+      const closeTimeout = setTimeout(() => setIsOpen(false), 12000)
+
+      return () => {
+        clearTimeout(openTimeout)
+        clearTimeout(closeTimeout)
+      }
+    }
+  }, [isAppLoading, isMerchAvailable, merchData])
 
   const handleClose = () => {
     setIsOpen(false)
   }
 
-  if (!merchData) return null
+  // Don't render anything while the app is loading or if no merch data
+  if (isAppLoading || !merchData) return null
 
   return (
     <AnimatePresence>

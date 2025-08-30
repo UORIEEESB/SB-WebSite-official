@@ -9,9 +9,14 @@ type Event = {
   date: string
   description: string
   image: string
+  url: string
 }
 
-export default function Events() {
+interface EventsProps {
+  onLoad?: () => void
+}
+
+export default function Events( { onLoad }: EventsProps) {
   const [events, setEvents] = useState<Event[]>([])
   const trackRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
@@ -22,8 +27,11 @@ export default function Events() {
         const res = await fetch('/api/OurNews')
         const data = await res.json()
         setEvents(data.events)
+        onLoad?.()
       } catch (error) {
         console.error('Failed to fetch events:', error)
+        setEvents([])
+        onLoad?.()
       }
     }
     fetchEvents()
@@ -65,7 +73,7 @@ export default function Events() {
       {/* Horizontal Scroll Marquee */}
       <div className="relative overflow-hidden">
         <div ref={trackRef} className="marquee-track flex gap-6 w-max">
-          {[...events, ...events].map(({ title, date, description, image }, index) => (
+          {[...events, ...events].map(({ title, date, description, image, url }, index) => (
             <div
               key={index}
               className="bg-neutral-800 rounded-lg overflow-hidden shadow-lg hover:shadow-blue-600 transition-shadow w-80 flex-shrink-0"
@@ -80,7 +88,9 @@ export default function Events() {
                 />
               </div>
               <div className="p-6 text-white">
+                <a href={url} target="_blank" rel="noopener noreferrer">
                 <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                </a>
                 <p className="text-sm text-blue-400 mb-3">{date}</p>
                 <p className="text-sm text-gray-200">{description}</p>
               </div>
@@ -90,7 +100,7 @@ export default function Events() {
 
         <style jsx>{`
           .marquee-track {
-            animation: scroll-left 60s linear infinite;
+            animation: scroll-left 100s linear infinite;
             animation-play-state: running; /* default */
           }
 
