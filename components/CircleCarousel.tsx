@@ -58,7 +58,7 @@ export default function CircleCarousel() {
 
   return (
     <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex items-center justify-center">
-      <div className="relative w-56 h-56 rounded-full border-8 border-blue-800 shadow-lg overflow-hidden bg-white">
+      <div className="relative w-56 h-56 rounded-full border-8 border-green-800 shadow-lg overflow-hidden bg-white">
         {/* Preview Image */}
         {animationImages.length > 0 && (
           <Image
@@ -83,8 +83,8 @@ export default function CircleCarousel() {
               key={i}
               className={`absolute w-4 h-4 rounded-full transition-all duration-300 ${
                 activeIndex === i
-                  ? 'bg-white border-2 border-blue-600 scale-125'
-                  : 'bg-blue-400'
+                  ? 'bg-white border-2 border-green-600 scale-125'
+                  : 'bg-green-400'
               }`}
               style={{
                 top: `calc(50% + ${y}px - 0.5rem)`,

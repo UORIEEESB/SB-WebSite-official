@@ -90,14 +90,14 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
           &times;
         </button>
         
-        <Dialog.Title className="text-3xl font-semibold mb-6 py-4 text-center text-blue-700">Send Us A Message</Dialog.Title>
+        <Dialog.Title className="text-3xl font-semibold mb-6 py-4 text-center text-green-700">Send Us A Message</Dialog.Title>
         <div className="p-6 overflow-y-auto flex-1">
         {submitted ? (
           <div className="text-center">
             <p className="text-green-600 mb-6 font-medium">Thanks! Your message has been sent.</p>
             <button
               onClick={handleReset}
-              className="inline-block px-6 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition"
+              className="inline-block px-6 py-2 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition"
             >
               Send Another Message
             </button>
@@ -119,7 +119,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                   value={form[name as keyof typeof form]}
                   onChange={handleChange}
                   className={`border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 transition ${
-                    errors[name] ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-blue-500'
+                    errors[name] ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-green-500'
                   }`}
                 />
                 <span className="text-xs mt-1 text-gray-400">{helper}</span>
@@ -135,7 +135,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                 onChange={handleChange}
                 rows={4}
                 className={`border rounded-lg px-3 py-2 resize-none focus:outline-none focus:ring-2 transition ${
-                  errors.message ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-blue-500'
+                  errors.message ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-green-500'
                 }`}
               />
               <span className="text-xs mt-1 text-gray-400">Write your message here.</span>
@@ -146,7 +146,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
               type="button"
               disabled={loading}
               onClick={handleSubmit}
-              className="mt-3 bg-blue-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition disabled:opacity-60"
+              className="mt-3 bg-green-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-green-700 transition disabled:opacity-60"
             >
               {loading ? 'Sending...' : 'Send'}
             </button>

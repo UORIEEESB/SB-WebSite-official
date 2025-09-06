@@ -37,7 +37,7 @@ const LoaderAnimation: React.FC<LoaderAnimationProps> = ({ isLoading, onAnimatio
         }`}
       >
         <Image
-          src="/images/IEEE-UoR-Logo.png"
+          src="/images/IAS Logo white.png"
           alt="Loading"
           fill
           className="object-contain"
@@ -58,7 +58,7 @@ const LoaderAnimation: React.FC<LoaderAnimationProps> = ({ isLoading, onAnimatio
         }
 
         @keyframes heartbeat-glow-exit {
-          0% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.8)); }
+          0% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 25px rgba(59, 246, 130, 0.8)); }
           100% { transform: scale(0.75); opacity: 0; filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
         }
 

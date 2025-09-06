@@ -118,7 +118,7 @@ export default function MerchModal() {
                   </button>
                   <a
                     href={merchData.Merch_Buy_Link}
-                    className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-md transition-all"
+                    className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-medium shadow-md transition-all"
                   >
                     Buy Now
                   </a>
