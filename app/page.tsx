@@ -74,11 +74,11 @@ export default function Home() {
       className="relative overflow-hidden min-h-screen"
       style={{
         background: `radial-gradient(
-          circle at 25% 35%, 
-          #005A9D 0%,    
-          #004081 35%,  
-          #002B5D 65%,   
-          #001834 90%    
+          circle at 25% 35%,
+          #006341 0%,   /* IEEE Green base */
+          #006341 30%,  /* softened medium green */
+          #3C6E11 65%,  /* deep forest green */
+          #16240A 90%   /* very dark green/black */  
         )`,
       }}
     >

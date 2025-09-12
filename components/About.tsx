@@ -82,8 +82,8 @@ export default function About() {
           { label: 'Subchapters', value: subchapters },
         ].map(({ label, value }) => (
           <div key={label} className="flex flex-col items-center relative">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full before:absolute before:inset-0 before:rounded-full before:bg-blue-500/30 before:blur-xl before:animate-pulse">
-              <span className="text-3xl sm:text-4xl font-extrabold text-blue-400 z-10">
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full before:absolute before:inset-0 before:rounded-full before:bg-green-500/30 before:blur-xl before:animate-pulse">
+              <span className="text-3xl sm:text-4xl font-extrabold text-green-400 z-10">
                 <Counter target={value} />
               </span>
             </div>

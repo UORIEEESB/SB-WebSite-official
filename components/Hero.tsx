@@ -44,7 +44,7 @@ export default function Hero({ onLoad }: HeroContent) {
         </p>
         <a
           href="#about"
-          className="inline-block bg-blue-600 hover:bg-blue-500 transition px-5 sm:px-6 py-2.5 sm:py-3 text-white font-semibold rounded-lg"
+          className="inline-block bg-green-600 hover:bg-green-500 transition px-5 sm:px-6 py-2.5 sm:py-3 text-white font-semibold rounded-lg"
         >
           Learn More
         </a>
