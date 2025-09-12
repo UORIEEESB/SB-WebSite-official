@@ -71,17 +71,17 @@ export default function Home() {
 
   return (
     <main
-      className="relative overflow-hidden min-h-screen"
-      style={{
-        background: `radial-gradient(
-          circle at 25% 35%, 
-          #005A9D 0%,    
-          #004081 35%,  
-          #002B5D 65%,   
-          #001834 90%    
-        )`,
-      }}
-    >
+  className="relative overflow-hidden min-h-screen"
+  style={{
+    background: `radial-gradient(
+      circle at 25% 35%, 
+      #862633 0%,    
+      #A83244 30%,    
+      #5F2167 65%,    
+      #2E0B35 90%    
+    )`,
+  }}
+>
       {/* Loader Animation */}
       <LoaderAnimation 
         isLoading={loading} 

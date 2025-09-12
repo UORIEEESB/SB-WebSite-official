@@ -67,7 +67,7 @@ export default function NewsPage() {
     .sort((a, b) => (b ?? 0) - (a ?? 0))
 
   return (
-    <main className="relative overflow-hidden min-h-screen bg-[radial-gradient(circle_at_25%_35%,#00629B_0%,#00497A_40%,#00325B_70%,#001F33_90%)]">
+    <main className="relative overflow-hidden min-h-screen bg-[radial-gradient(circle_at_25%_35%,#862633_0%,#A83244_40%,#5F2167_70%,#2E0B35_90%)]">
       {/* Loading Animation */}
       <LoaderAnimation 
         isLoading={loading} 
@@ -91,7 +91,7 @@ export default function NewsPage() {
             <button
               onClick={() => { setYearFilter('all'); setCurrentPage(1) }}
               className={`px-4 py-2 rounded-full border transition-colors ${
-                yearFilter === 'all' ? 'bg-blue-700 text-white' : 'border-blue-600 text-blue-300 hover:bg-blue-700/20'
+                yearFilter === 'all' ? 'bg-red-700 text-white' : 'border-red-600 text-red-100 hover:bg-red-700/20'
               }`}
             >
               All Years
@@ -101,7 +101,7 @@ export default function NewsPage() {
                 key={year}
                 onClick={() => { setYearFilter(year); setCurrentPage(1) }}
                 className={`px-4 py-2 rounded-full border transition-colors ${
-                  yearFilter === year ? 'bg-blue-700 text-white' : 'border-blue-600 text-blue-300 hover:bg-blue-700/20'
+                  yearFilter === year ? 'bg-red-700 text-white' : 'border-red-600 text-red-100 hover:bg-red-700/20'
                 }`}
               >
                 {year}
@@ -114,7 +114,7 @@ export default function NewsPage() {
             {paginatedEvents.map((event, index) => (
               <div
                 key={index}
-                className="flex flex-col md:flex-row bg-neutral-800/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg hover:shadow-blue-700/50 transition-all duration-300 hover:transform hover:scale-[1.02]"
+                className="flex flex-col md:flex-row bg-neutral-800/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg hover:shadow-red-700/50 transition-all duration-300 hover:transform hover:scale-[1.02]"
               >
                 <div className="relative w-full md:w-1/3 h-60 md:h-auto">
                   <Image
@@ -126,11 +126,11 @@ export default function NewsPage() {
                 </div>
                 <div className="p-4 sm:p-6 flex flex-col justify-center w-full md:w-2/3">
                   <Link href={event.url}>
-                    <h3 className="text-xl sm:text-2xl font-semibold mb-2 hover:underline cursor-pointer hover:text-blue-300 transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-semibold mb-2 hover:underline cursor-pointer hover:text-red-300 transition-colors">
                       {event.title}
                     </h3>
                   </Link>
-                  <p className="text-sm text-blue-400 mb-2">{event.date}</p>
+                  <p className="text-sm text-red-400 mb-2">{event.date}</p>
                   <p className="text-gray-300 text-sm">{event.description}</p>
                 </div>
               </div>
@@ -146,8 +146,8 @@ export default function NewsPage() {
                   onClick={() => setCurrentPage(i + 1)}
                   className={`w-10 h-10 rounded-full border text-sm transition-colors ${
                     currentPage === i + 1
-                      ? 'bg-blue-700 text-white'
-                      : 'border-blue-700 text-blue-300 hover:bg-blue-700/20'
+                      ? 'bg-red-700 text-white'
+                      : 'border-red-700 text-red-300 hover:bg-red-700/20'
                   }`}
                 >
                   {i + 1}

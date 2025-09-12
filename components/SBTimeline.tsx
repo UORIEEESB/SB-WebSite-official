@@ -94,7 +94,7 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
       </p>
 
       {/* Glowing beam */}
-      <div className="absolute top-1/2 left-0 w-full h-1 bg-blue-500 shadow-[0_0_20px_#3b82f6] z-0" />
+      <div className="absolute top-1/2 left-0 w-full h-1 bg-red-500 shadow-[0_0_20px_#FF0000] z-0" />
 
       {/* Timeline container */}
       <div
@@ -113,7 +113,7 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
             <div
               key={i}
               onClick={() => setSelectedItem(item)}
-              className="relative w-60 h-80 flex-shrink-0 cursor-pointer rounded-xl overflow-hidden shadow-xl border border-blue-500 bg-black bg-opacity-60 flex flex-col hover:scale-105 transition-transform duration-300"
+              className="relative w-60 h-80 flex-shrink-0 cursor-pointer rounded-xl overflow-hidden shadow-xl border border-red-500 bg-black bg-opacity-60 flex flex-col hover:scale-105 transition-transform duration-300"
             >
               <div className="relative w-full h-40">
                 <Image
@@ -126,7 +126,7 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
               <div className="p-3 flex flex-col justify-between space-y-1 bg-gradient-to-t from-black/80 to-transparent text-white">
                 <h3 className="text-lg font-bold line-clamp-2">{item.title}</h3>
                 <p className="text-sm text-gray-300 line-clamp-3">{item.description}</p>
-                <span className="text-xs text-blue-400">{item.date}</span>
+                <span className="text-xs text-red-400">{item.date}</span>
               </div>
             </div>
           ))}
@@ -140,7 +140,7 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
           onClick={() => setSelectedItem(null)}
         >
           <div
-            className="relative bg-[#0A1A2F]/80 backdrop-blur-xl rounded-2xl shadow-2xl p-6 max-w-lg w-full transform transition-all duration-300 scale-100 hover:scale-[1.01] border border-blue-500/30"
+            className="relative bg-[#0A1A2F]/80 backdrop-blur-xl rounded-2xl shadow-2xl p-6 max-w-lg w-full transform transition-all duration-300 scale-100 hover:scale-[1.01] border border-red-500/30"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative w-full h-60 rounded-lg overflow-hidden mb-4">
@@ -153,7 +153,7 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
             </div>
             <h3 className="text-xl font-bold mb-2 text-white">{selectedItem.title}</h3>
             <p className="text-sm text-gray-300 mb-2">{selectedItem.date}</p>
-            <div className="text-gray-200 text-sm max-h-60 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent">
+            <div className="text-gray-200 text-sm max-h-60 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-transparent">
               {selectedItem.description}
             </div>
             <div className="flex justify-center px-4 py-4">
@@ -163,7 +163,7 @@ export default function SBTimeline({ onLoad }: SBTimelineProps) {
                   e.stopPropagation();
                   setSelectedItem(null);
                 }}
-                className="text-white hover:text-blue-300"
+                className="text-white hover:text-red-300"
               >
                 Close
               </button>

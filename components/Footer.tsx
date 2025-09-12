@@ -63,7 +63,7 @@ export default function Footer() {
       <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-10 py-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {/* Address */}
         <div>
-          <h4 className="text-2xl font-bold text-blue-400 mb-5">Address</h4>
+          <h4 className="text-2xl font-bold text-red-400 mb-5">Address</h4>
           <p className="text-base leading-relaxed text-gray-200">
             {footerData.address && <>{footerData.address}<br /></>}
             {footerData.university && <>{footerData.university}<br /></>}
@@ -74,26 +74,26 @@ export default function Footer() {
 
         {/* Menu */}
         <div>
-          <h4 className="text-2xl font-bold text-blue-400 mb-5">Menu</h4>
+          <h4 className="text-2xl font-bold text-red-400 mb-5">Menu</h4>
           <ul className="space-y-3 text-base text-gray-200">
-            <li><a href="#about" className="hover:text-blue-400 transition">About</a></li>
-            <li><a href="#events" className="hover:text-blue-400 transition">Events</a></li>
-            <li><a href="#team" className="hover:text-blue-400 transition">Team</a></li>
-            <li><a href="#contact" className="hover:text-blue-400 transition">Contact</a></li>
-            <li><a href="https://drive.google.com/file/d/172v3PLGgixQk8n6n5cCbpZPH-cerdz-3/view?usp=sharing" className="hover:text-blue-400 transition">Brand Toolkit</a></li>
+            <li><a href="#about" className="hover:text-red-400 transition">About</a></li>
+            <li><a href="#events" className="hover:text-red-400 transition">Events</a></li>
+            <li><a href="#team" className="hover:text-red-400 transition">Team</a></li>
+            <li><a href="#contact" className="hover:text-red-400 transition">Contact</a></li>
+            <li><a href="https://drive.google.com/file/d/172v3PLGgixQk8n6n5cCbpZPH-cerdz-3/view?usp=sharing" className="hover:text-red-400 transition">Brand Toolkit</a></li>
           </ul>
         </div>
 
         {/* Contact */}
         <div>
-          <h4 className="text-2xl font-bold text-blue-400 mb-5">Contact</h4>
+          <h4 className="text-2xl font-bold text-red-400 mb-5">Contact</h4>
           {footerData.email && <p className="text-base text-gray-200">{footerData.email}</p>}
           {footerData.phone && <p className="text-base text-gray-200 mt-2">{footerData.phone}</p>}
         </div>
 
         {/* Social Media */}
         <div>
-          <h4 className="text-2xl font-bold text-blue-400 mb-5">Follow Us</h4>
+          <h4 className="text-2xl font-bold text-red-400 mb-5">Follow Us</h4>
           <div className="flex space-x-5 text-2xl">
   {footerData.twitter && (
     <a
@@ -102,7 +102,7 @@ export default function Footer() {
       rel="noopener noreferrer"
       aria-label="Twitter"
       title="Twitter"
-      className="hover:text-blue-400 transition-transform transform hover:scale-110"
+      className="hover:text-red-400 transition-transform transform hover:scale-110"
     >
       <FaTwitter />
     </a>
@@ -114,7 +114,7 @@ export default function Footer() {
       rel="noopener noreferrer"
       aria-label="LinkedIn"
       title="LinkedIn"
-      className="hover:text-blue-400 transition-transform transform hover:scale-110"
+      className="hover:text-red-400 transition-transform transform hover:scale-110"
     >
       <FaLinkedin />
     </a>
@@ -126,7 +126,7 @@ export default function Footer() {
       rel="noopener noreferrer"
       aria-label="Facebook"
       title="Facebook"
-      className="hover:text-blue-400 transition-transform transform hover:scale-110"
+      className="hover:text-red-400 transition-transform transform hover:scale-110"
     >
       <FaFacebookF />
     </a>
@@ -138,7 +138,7 @@ export default function Footer() {
       rel="noopener noreferrer"
       aria-label="YouTube"
       title="YouTube"
-      className="hover:text-blue-400 transition-transform transform hover:scale-110"
+      className="hover:text-red-400 transition-transform transform hover:scale-110"
     >
       <FaYoutube />
     </a>
