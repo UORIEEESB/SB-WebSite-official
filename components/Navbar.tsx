@@ -13,11 +13,11 @@ export default function Navbar() {
 
   // Subchapter mapping with slugs matching rewrites
   const subChapters = [
-    { name: 'RAS', slug: 'https://ieee-main-new-git-ras-manujaya-pereras-projects.vercel.app' },
-    { name: 'CS', slug: 'https://ieee-main-new-git-cs-manujaya-pereras-projects.vercel.app' },
-    { name: 'ComSoc', slug: 'https://ieee-main-new-git-comsoc-manujaya-pereras-projects.vercel.app' },
-    { name: 'PES', slug: 'https://ieee-main-new-git-pes-manujaya-pereras-projects.vercel.app' },
-    { name: 'IAS', slug: 'https://ieee-main-new-git-ias-manujaya-pereras-projects.vercel.app' },
+    { name: 'RAS', slug: 'https://ieee-main-new-uat-git-ras-manujaya-pereras-projects.vercel.app' },
+    { name: 'CS', slug: 'https://ieee-main-new-uat-git-cs-manujaya-pereras-projects.vercel.app' },
+    { name: 'ComSoc', slug: 'https://ieee-main-new-uat-git-comsoc-manujaya-pereras-projects.vercel.app' },
+    { name: 'PES', slug: 'https://ieee-main-new-uat-git-pes-manujaya-pereras-projects.vercel.app' },
+    { name: 'IAS', slug: 'https://ieee-main-new-uat-git-ias-manujaya-pereras-projects.vercel.app' },
   ]  
 
   return (
