@@ -11,7 +11,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [open, setOpen] = useState(false)
 
-  // Branch slug mapping
+  // Subchapter mapping with slugs matching rewrites
   const subChapters = [
     { name: 'WIE', slug: '/wie' },
     { name: 'RAS', slug: '/ras' },
@@ -36,15 +36,9 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <ul className="hidden md:flex space-x-8 text-white font-medium text-lg items-center">
-          <li>
-            <Link href="/" className="hover:text-blue-500 transition">Home</Link>
-          </li>
-          <li>
-            <a href="#about" className="hover:text-blue-500 transition">About</a>
-          </li>
-          <li>
-            <a href="/news" className="hover:text-blue-500 transition">News</a>
-          </li>
+          <li><Link href="/" className="hover:text-blue-500 transition">Home</Link></li>
+          <li><a href="#about" className="hover:text-blue-500 transition">About</a></li>
+          <li><a href="/news" className="hover:text-blue-500 transition">News</a></li>
 
           {/* Sub Chapters Dropdown */}
           <li
