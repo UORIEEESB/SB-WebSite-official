@@ -35,6 +35,8 @@ const securityHeaders = [
   },
 ];
 
+const branches = ["ras", "comsoc", "cs", "pes", "ias"]; // list your branches here
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
@@ -50,6 +52,15 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
     ];
+  },
+
+  async rewrites() {
+    const branchRewrites = branches.map(branch => ({
+      source: `/${branch}/:path*`,
+      destination: `https://${branch}-ieee-main-new-bry3.vercel.app/:path*`,
+    }));
+
+    return branchRewrites;
   },
 };
 

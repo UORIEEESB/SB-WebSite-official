@@ -11,6 +11,15 @@ export default function Navbar() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [open, setOpen] = useState(false)
 
+  // Branch slug mapping
+  const subChapters = [
+    { name: 'WIE', slug: '/wie' },
+    { name: 'RAS', slug: '/ras' },
+    { name: 'PES', slug: '/pes' },
+    { name: 'CS', slug: '/cs' },
+    { name: 'ComSoc', slug: '/comsoc' },
+  ]
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-70 backdrop-blur-md z-50 shadow-md">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 md:px-10 h-16">
@@ -48,11 +57,13 @@ export default function Navbar() {
             </button>
             {isDropdownOpen && (
               <ul className="absolute top-full mt-2 bg-white text-black rounded shadow-lg py-2 w-48 z-50">
-                <li><Link href="https://www.ieee-ruhuna-wie.com" className="block px-4 py-2 hover:bg-blue-100">WIE</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-ras.com" className="block px-4 py-2 hover:bg-blue-100">RAS</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-pes.com" className="block px-4 py-2 hover:bg-blue-100">PES</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-cs.com" className="block px-4 py-2 hover:bg-blue-100">CS</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-comsoc.com" className="block px-4 py-2 hover:bg-blue-100">ComSoc</Link></li>
+                {subChapters.map((chapter) => (
+                  <li key={chapter.slug}>
+                    <Link href={chapter.slug} className="block px-4 py-2 hover:bg-blue-100">
+                      {chapter.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             )}
           </li>
@@ -101,11 +112,17 @@ export default function Navbar() {
                   Sub Chapters ▾
                 </summary>
                 <ul className="mt-2 pl-4 flex flex-col space-y-2 text-black bg-white rounded p-2">
-                  <li><Link href="https://www.ieee-ruhuna-wie.com" className="hover:bg-blue-100 px-2 py-1 rounded">WIE</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-ras.com" className="hover:bg-blue-100 px-2 py-1 rounded">RAS</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-pes.com" className="hover:bg-blue-100 px-2 py-1 rounded">PES</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-cs.com" className="hover:bg-blue-100 px-2 py-1 rounded">CS</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-comsoc.com" className="hover:bg-blue-100 px-2 py-1 rounded">ComSoc</Link></li>
+                  {subChapters.map((chapter) => (
+                    <li key={chapter.slug}>
+                      <Link
+                        href={chapter.slug}
+                        className="hover:bg-blue-100 px-2 py-1 rounded"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {chapter.name}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </details>
             </li>
