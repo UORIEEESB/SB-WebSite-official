@@ -13,12 +13,12 @@ export default function Navbar() {
 
   // Subchapter mapping with slugs matching rewrites
   const subChapters = [
-    { name: 'WIE', slug: '/wie' },
-    { name: 'RAS', slug: '/ras' },
-    { name: 'PES', slug: '/pes' },
-    { name: 'CS', slug: '/cs' },
-    { name: 'ComSoc', slug: '/comsoc' },
-  ]
+    { name: 'RAS', slug: 'https://ieee-main-new-git-ras-manujaya-pereras-projects.vercel.app' },
+    { name: 'CS', slug: 'https://ieee-main-new-git-cs-manujaya-pereras-projects.vercel.app' },
+    { name: 'ComSoc', slug: 'https://ieee-main-new-git-comsoc-manujaya-pereras-projects.vercel.app' },
+    { name: 'PES', slug: 'https://ieee-main-new-git-pes-manujaya-pereras-projects.vercel.app' },
+    { name: 'IAS', slug: 'https://ieee-main-new-git-ias-manujaya-pereras-projects.vercel.app' },
+  ]  
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-70 backdrop-blur-md z-50 shadow-md">
