@@ -69,7 +69,7 @@ export default function Events({ onLoad }: EventsProps) {
       <div className="flex justify-center">
         <Link
           href="/news"
-          className="text-4xl font-extrabold mb-12 text-center text-white transition-all duration-300 hover:text-blue-400 hover:drop-shadow-[0_0_8px_#3b82f6]"
+          className="text-4xl font-extrabold mb-12 text-center text-white transition-all duration-300 hover:text-orange-400 hover:drop-shadow-[0_0_8px_#FFA300]"
         >
           News & Events
         </Link>
@@ -81,7 +81,7 @@ export default function Events({ onLoad }: EventsProps) {
           {[...events, ...events].map(({ title, date, description, image, url }, index) => (
             <div
               key={index}
-              className="bg-neutral-800 rounded-lg overflow-hidden shadow-lg hover:shadow-blue-600 transition-shadow w-80 flex-shrink-0"
+              className="bg-neutral-800 rounded-lg overflow-hidden shadow-lg hover:shadow-orange-600 transition-shadow w-80 flex-shrink-0"
             >
               <div className="relative h-48 w-full">
                 <Image
@@ -96,7 +96,7 @@ export default function Events({ onLoad }: EventsProps) {
                 <a href={url} target="_blank" rel="noopener noreferrer">
                   <h3 className="text-xl font-semibold mb-2">{title}</h3>
                 </a>
-                <p className="text-sm text-blue-400 mb-3">{date}</p>
+                <p className="text-sm text-orange-400 mb-3">{date}</p>
                 <p className="text-sm text-gray-200">{description}</p>
               </div>
             </div>

@@ -66,7 +66,7 @@ export default function Team({ onLoad }: TeamProps) {
         <motion.div className="flex gap-12 w-max" animate={controls}>
           {[...teamMembers, ...teamMembers].map(({ name, role, photo }, index) => (
             <div key={`${name}-${index}`} className="flex flex-col items-center space-y-3">
-              <div className="relative w-32 h-32 rounded-full overflow-hidden shadow-lg shadow-blue-600/50">
+              <div className="relative w-32 h-32 rounded-full overflow-hidden shadow-lg shadow-orange-600/50">
                 <Image
                   src={photo}
                   alt={name}
@@ -76,7 +76,7 @@ export default function Team({ onLoad }: TeamProps) {
                 />
               </div>
               <h3 className="text-lg font-semibold whitespace-nowrap">{name}</h3>
-              <p className="text-blue-300 whitespace-nowrap">{role}</p>
+              <p className="text-orange-300 whitespace-nowrap">{role}</p>
             </div>
           ))}
         </motion.div>

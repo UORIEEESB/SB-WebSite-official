@@ -17,7 +17,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="block w-32 sm:w-36 h-10 sm:h-12 relative">
           <Image
-            src="/images/IEEE-UoR-Logo.png"
+            src="/images/Cs logo White Updated.png"
             alt="IEEE UoR Logo"
             fill
             className="object-contain"
@@ -28,13 +28,13 @@ export default function Navbar() {
         {/* Desktop Links */}
         <ul className="hidden md:flex space-x-8 text-white font-medium text-lg items-center">
           <li>
-            <Link href="/" className="hover:text-blue-500 transition">Home</Link>
+            <Link href="/" className="hover:text-orange-500 transition">Home</Link>
           </li>
           <li>
-            <a href="#about" className="hover:text-blue-500 transition">About</a>
+            <a href="#about" className="hover:text-orange-500 transition">About</a>
           </li>
           <li>
-            <a href="/news" className="hover:text-blue-500 transition">News</a>
+            <a href="/news" className="hover:text-orange-500 transition">News</a>
           </li>
 
           {/* Sub Chapters Dropdown */}
@@ -43,16 +43,16 @@ export default function Navbar() {
             onMouseEnter={() => setDropdownOpen(true)}
             onMouseLeave={() => setDropdownOpen(false)}
           >
-            <button className="hover:text-blue-500 transition flex items-center gap-1">
+            <button className="hover:text-orange-500 transition flex items-center gap-1">
               Chapters ▾
             </button>
             {isDropdownOpen && (
               <ul className="absolute top-full mt-2 bg-white text-black rounded shadow-lg py-2 w-48 z-50">
-                <li><Link href="https://www.ieee-ruhuna-wie.com" className="block px-4 py-2 hover:bg-blue-100">WIE</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-ras.com" className="block px-4 py-2 hover:bg-blue-100">RAS</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-pes.com" className="block px-4 py-2 hover:bg-blue-100">PES</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-cs.com" className="block px-4 py-2 hover:bg-blue-100">CS</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-comsoc.com" className="block px-4 py-2 hover:bg-blue-100">ComSoc</Link></li>
+                <li><Link href="https://www.ieee-ruhuna-wie.com" className="block px-4 py-2 hover:bg-orange-100">WIE</Link></li>
+                <li><Link href="https://www.ieee-ruhuna-ras.com" className="block px-4 py-2 hover:bg-orange-100">RAS</Link></li>
+                <li><Link href="https://www.ieee-ruhuna-pes.com" className="block px-4 py-2 hover:bg-orange-100">PES</Link></li>
+                <li><Link href="https://www.ieee-ruhuna-cs.com" className="block px-4 py-2 hover:bg-orange-100">CS</Link></li>
+                <li><Link href="https://www.ieee-ruhuna-comsoc.com" className="block px-4 py-2 hover:bg-orange-100">ComSoc</Link></li>
               </ul>
             )}
           </li>
@@ -62,10 +62,10 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="hover:text-blue-500 transition flex items-center gap-1 text-white"
+              className="hover:text-orange-500 transition flex items-center gap-1 text-white"
             >
               Contact
-              <Mail className="w-5 h-5 animate-wiggle text-blue-400" />
+              <Mail className="w-5 h-5 animate-wiggle text-orange-400" />
             </button>
             <ContactModal isOpen={open} onClose={() => setOpen(false)} />
           </li>
@@ -85,27 +85,27 @@ export default function Navbar() {
         <div className="md:hidden bg-black bg-opacity-90 backdrop-blur-md">
           <ul className="flex flex-col space-y-4 px-6 py-4 text-white font-medium text-lg">
             <li>
-              <Link href="/" className="hover:text-blue-500 transition" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+              <Link href="/" className="hover:text-orange-500 transition" onClick={() => setMobileMenuOpen(false)}>Home</Link>
             </li>
             <li>
-              <a href="#about" className="hover:text-blue-500 transition" onClick={() => setMobileMenuOpen(false)}>About</a>
+              <a href="#about" className="hover:text-orange-500 transition" onClick={() => setMobileMenuOpen(false)}>About</a>
             </li>
             <li>
-              <a href="/news" className="hover:text-blue-500 transition" onClick={() => setMobileMenuOpen(false)}>News</a>
+              <a href="/news" className="hover:text-orange-500 transition" onClick={() => setMobileMenuOpen(false)}>News</a>
             </li>
 
             {/* Sub Chapters */}
             <li>
               <details className="group">
-                <summary className="flex justify-between items-center cursor-pointer hover:text-blue-500 transition">
+                <summary className="flex justify-between items-center cursor-pointer hover:text-orange-500 transition">
                   Sub Chapters ▾
                 </summary>
                 <ul className="mt-2 pl-4 flex flex-col space-y-2 text-black bg-white rounded p-2">
-                  <li><Link href="https://www.ieee-ruhuna-wie.com" className="hover:bg-blue-100 px-2 py-1 rounded">WIE</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-ras.com" className="hover:bg-blue-100 px-2 py-1 rounded">RAS</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-pes.com" className="hover:bg-blue-100 px-2 py-1 rounded">PES</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-cs.com" className="hover:bg-blue-100 px-2 py-1 rounded">CS</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-comsoc.com" className="hover:bg-blue-100 px-2 py-1 rounded">ComSoc</Link></li>
+                  <li><Link href="https://www.ieee-ruhuna-wie.com" className="hover:bg-orange-100 px-2 py-1 rounded">WIE</Link></li>
+                  <li><Link href="https://www.ieee-ruhuna-ras.com" className="hover:bg-orange-100 px-2 py-1 rounded">RAS</Link></li>
+                  <li><Link href="https://www.ieee-ruhuna-pes.com" className="hover:bg-orange-100 px-2 py-1 rounded">PES</Link></li>
+                  <li><Link href="https://www.ieee-ruhuna-cs.com" className="hover:bg-orange-100 px-2 py-1 rounded">CS</Link></li>
+                  <li><Link href="https://www.ieee-ruhuna-comsoc.com" className="hover:bg-orange-100 px-2 py-1 rounded">ComSoc</Link></li>
                 </ul>
               </details>
             </li>
@@ -115,10 +115,10 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setOpen(true)}
-                className="hover:text-blue-500 transition flex items-center gap-1"
+                className="hover:text-orange-500 transition flex items-center gap-1"
               >
                 Contact
-                <Mail className="w-5 h-5 animate-wiggle text-blue-400" />
+                <Mail className="w-5 h-5 animate-wiggle text-orange-400" />
               </button>
             </li>
           </ul>

@@ -76,7 +76,7 @@ export default function AnimatedCircuit() {
       return path
     }
 
-    // 📱 Optimize path count for mobile
+    // Optimize path count for mobile
     const numPaths = pageWidth < 768 ? 100 : 400
     const generatedPaths = Array.from({ length: numPaths }, generatePath)
     setPaths(generatedPaths)
@@ -94,7 +94,7 @@ export default function AnimatedCircuit() {
           duration: 5 + (i % 4),
           repeat: -1,
           ease: 'power1.inOut',
-          delay: pageWidth < 768 ? i * 0.5 : i * 0.25, // 📱 slower stagger on mobile
+          delay: pageWidth < 768 ? i * 0.5 : i * 0.25, //  slower stagger on mobile
         }
       )
     })
@@ -120,7 +120,7 @@ export default function AnimatedCircuit() {
               if (el) pathRefs.current[i] = el
             }}
             d={d}
-            stroke="#0ff"
+            stroke="#fff"
             strokeWidth={pageWidth < 768 ? "0.5" : "1"}
             opacity={pageWidth < 768 ? "0.1" : "0.15"}
             className="drop-shadow-[0_0_4px_#0ff]"

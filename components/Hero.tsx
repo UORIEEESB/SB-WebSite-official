@@ -39,12 +39,12 @@ export default function Hero({ onLoad }: HeroContent) {
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-snug sm:leading-tight md:leading-tight">
           {heroTitle}
         </h1>
-        <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+        <p className="text-gray-100 text-base sm:text-lg leading-relaxed">
           {heroParagraph}
         </p>
         <a
           href="#about"
-          className="inline-block bg-blue-600 hover:bg-blue-500 transition px-5 sm:px-6 py-2.5 sm:py-3 text-white font-semibold rounded-lg"
+          className="inline-block bg-orange-600 hover:bg-orange-500 transition px-5 sm:px-6 py-2.5 sm:py-3 text-white font-semibold rounded-lg"
         >
           Learn More
         </a>

@@ -87,7 +87,7 @@ export default function FloatingCarousel() {
 
   return (
     <div className="fixed right-[-200px] top-1/2 -translate-y-1/2 z-40 hidden md:block">
-      <div className="relative w-[520px] h-[520px] rounded-full border-[6px] border-blue-600 shadow-[0_0_50px_#3b82f6] bg-black bg-opacity-80 backdrop-blur-md flex items-center justify-center">
+      <div className="relative w-[520px] h-[520px] rounded-full border-[6px] border-orange-600 shadow-[0_0_50px_#FFA300] bg-black bg-opacity-80 backdrop-blur-md flex items-center justify-center">
 
         {/* Glowing beam arc around the perimeter */}
         <svg viewBox="0 0 500 500" className="absolute w-full h-full pointer-events-none">
@@ -96,7 +96,7 @@ export default function FloatingCarousel() {
             cy="250"
             r="243"
             fill="none"
-            stroke="#3b82f6"
+            stroke="#FFA300"
             strokeWidth="5"
             strokeDasharray={`${arcLength} ${circumference}`}
             strokeDashoffset={beamOffset}
@@ -129,7 +129,7 @@ export default function FloatingCarousel() {
       {/* Glow animation style */}
       <style jsx>{`
         .animate-glow {
-          filter: drop-shadow(0 0 8px #3b82f6);
+          filter: drop-shadow(0 0 8px #FFA300);
           transition: stroke-dashoffset 0.3s ease-out;
         }
       `}</style>

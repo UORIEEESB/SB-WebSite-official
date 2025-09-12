@@ -27,7 +27,7 @@ export default function FloatingLogo() {
           alt="IEEE UoR Logo"
           fill
           priority
-          className="object-contain drop-shadow-[0_0_20px_#0af] opacity-60"
+          className="object-contain drop-shadow-[0_0_20px_#fff] opacity-60"
         />
       </div>
     </div>
