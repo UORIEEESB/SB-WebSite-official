@@ -37,7 +37,7 @@ const LoaderAnimation: React.FC<LoaderAnimationProps> = ({ isLoading, onAnimatio
         }`}
       >
         <Image
-          src="/images/IEEE-UoR-Logo.png"
+          src="/images/RAS_New_Logo_W.png"
           alt="Loading"
           fill
           className="object-contain"
