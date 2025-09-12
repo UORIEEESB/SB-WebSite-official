@@ -123,7 +123,7 @@ export default function AnimatedCircuit() {
             stroke="#fff"
             strokeWidth={pageWidth < 768 ? "0.5" : "1"}
             opacity={pageWidth < 768 ? "0.1" : "0.15"}
-            className="drop-shadow-[0_0_4px_#0ff]"
+            className="drop-shadow-[0_0_4px_#fff]"
             fill="none"
           />
         ))}
