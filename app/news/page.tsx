@@ -67,7 +67,7 @@ export default function NewsPage() {
     .sort((a, b) => (b ?? 0) - (a ?? 0))
 
   return (
-    <main className="relative overflow-hidden min-h-screen bg-[radial-gradient(circle_at_25%_35%,#00629B_0%,#00497A_40%,#00325B_70%,#001F33_90%)]">
+    <main className="relative overflow-hidden min-h-screen bg-[radial-gradient(circle_at_25%_35%,#00629B_0%,#00507A_40%,#003B5D_70%,#001F33_100%)]">
       {/* Loading Animation */}
       <LoaderAnimation 
         isLoading={loading} 

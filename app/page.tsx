@@ -75,10 +75,10 @@ export default function Home() {
       style={{
         background: `radial-gradient(
           circle at 25% 35%, 
-          #005A9D 0%,    
-          #004081 35%,  
-          #002B5D 65%,   
-          #001834 90%    
+          #00629B 0%,     
+          #00507A 40%, 
+          #003B5D 70%, 
+          #001F33 100%   
         )`,
       }}
     >

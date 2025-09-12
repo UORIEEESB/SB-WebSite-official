@@ -17,7 +17,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="block w-32 sm:w-36 h-10 sm:h-12 relative">
           <Image
-            src="/images/IEEE-UoR-Logo.png"
+            src="/images/White comsoc.png"
             alt="IEEE UoR Logo"
             fill
             className="object-contain"
