@@ -16,7 +16,6 @@ import AwardBadge from "@/components/AwardBadge"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import PromotionBanner from "@/components/PromotionBanner"
 import LoaderAnimation from "@/components/LoaderAnimation"
-import LaunchingPage from "@/components/LaunchingPage"
 
 export default function Home() {
   const { setAppLoading } = useLoading()
@@ -82,20 +81,7 @@ export default function Home() {
   const handleAnimationComplete = useCallback(() => {
     setShowContent(true)
     setAppLoading(false)
-  }, [setAppLoading])
-
-  // If LaunchReady, show Launch page first
-  if (launchReady && showLaunchPage) {
-    return (
-      <LaunchingPage
-        onEnter={async () => {
-          // Wait a bit to show loader animation
-          await new Promise(resolve => setTimeout(resolve, 5500))
-          setShowLaunchPage(false)
-        }}
-      />
-    )
-  }    
+  }, [setAppLoading])   
 
   return (
     <main
