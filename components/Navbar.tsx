@@ -18,6 +18,7 @@ export default function Navbar() {
     { name: 'ComSoc', slug: 'https://ieee-main-new-uat-git-comsoc-manujaya-pereras-projects.vercel.app' },
     { name: 'PES', slug: 'https://ieee-main-new-uat-git-pes-manujaya-pereras-projects.vercel.app' },
     { name: 'IAS', slug: 'https://ieee-main-new-uat-git-ias-manujaya-pereras-projects.vercel.app' },
+    { name: 'WIE', slug: 'https://ieee-main-new-uat-git-wie-manujaya-pereras-projects.vercel.app' }
   ]  
 
   return (
