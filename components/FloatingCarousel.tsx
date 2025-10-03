@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
@@ -54,36 +54,39 @@ export default function FloatingCarousel() {
     fetchAnimationImages()
   }, [])
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2
-      const totalHeight = document.body.scrollHeight - window.innerHeight
-      const scrollPercent = scrollPosition / totalHeight
+  const sectionsRef = useRef<Section[]>([])
+useEffect(() => {
+  sectionsRef.current = sections
+}, [sections])
 
-      // beam offset based on scroll percentage
-      const offset = (1 - scrollPercent) * circumference
-      setBeamOffset(offset)
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY + window.innerHeight / 2
+    const totalHeight = document.body.scrollHeight - window.innerHeight
+    const scrollPercent = scrollPosition / totalHeight
 
-      // Section detection
-      const visibleSectionIndex = sections.findIndex((section) => {
-        const element = document.getElementById(section.id)
-        if (!element) return false
+    const offset = (1 - scrollPercent) * circumference
+    setBeamOffset(offset)
 
-        const { top, height } = element.getBoundingClientRect()
-        const offsetTop = top + window.scrollY
-        return scrollPosition >= offsetTop && scrollPosition < offsetTop + height
-      })
+    const visibleSectionIndex = sectionsRef.current.findIndex((section) => {
+      const el = document.getElementById(section.id)
+      if (!el) return false
+      const top = el.offsetTop
+      const bottom = top + el.offsetHeight
+      return scrollPosition >= top && scrollPosition < bottom
+    })
 
-      if (visibleSectionIndex !== -1 && visibleSectionIndex !== activeIndex) {
-        setActiveIndex(visibleSectionIndex)
-      }
+    if (visibleSectionIndex !== -1 && visibleSectionIndex !== activeIndex) {
+      setActiveIndex(visibleSectionIndex)
     }
+  }
 
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
+  window.addEventListener('scroll', handleScroll)
+  handleScroll()
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [activeIndex, circumference])
+  return () => window.removeEventListener('scroll', handleScroll)
+}, [activeIndex, circumference])
+
 
   return (
     <div className="fixed right-[-200px] top-1/2 -translate-y-1/2 z-40 hidden md:block">

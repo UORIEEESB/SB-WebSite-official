@@ -13,7 +13,7 @@ export async function GET() {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.HOMEPAGE_SPREADSHEET_ID,
-      range: 'About!A2:AA2', // includes all existing + footer fields
+      range: 'About!A2:AB2', // includes all existing + footer fields
     })
 
     const row = response.data.values?.[0]
@@ -49,7 +49,8 @@ export async function GET() {
       'Contact_link',       // X
       'Award_Image',        // Y
       'Promo_Banner',
-      'Promo_Link'
+      'Promo_Link',
+      'Launch_ready'
     ]
 
     const homepageData: Record<string, string> = {}
