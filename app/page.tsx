@@ -16,14 +16,11 @@ import AwardBadge from "@/components/AwardBadge"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import PromotionBanner from "@/components/PromotionBanner"
 import LoaderAnimation from "@/components/LoaderAnimation"
-import LaunchingPage from "@/components/LaunchingPage"
 
 export default function Home() {
   const { setAppLoading } = useLoading()
   const [loading, setLoading] = useState(true)
   const [showContent, setShowContent] = useState(false)
-  const [launchReady, setLaunchReady] = useState(false)
-  const [showLaunchPage, setShowLaunchPage] = useState(false)
 
   const [componentsLoaded, setComponentsLoaded] = useState({
     promotion: false,
@@ -33,23 +30,6 @@ export default function Home() {
     events: false,
     team: false,
   })
-
-  // Fetch Launch flag from API
-  useEffect(() => {
-    async function fetchLaunch() {
-      try {
-        const res = await fetch('/api/HomePageContent')
-        const data = await res.json()
-        if (data.homepageData?.Launch_ready === 'TRUE') {
-          setLaunchReady(true)
-          setShowLaunchPage(true)
-        }
-      } catch (err) {
-        console.error('Failed to fetch Launch flag:', err)
-      }
-    }
-    fetchLaunch()
-  }, [])
 
   // Memoized handlers
   const handlePromotionLoad = useCallback(() => {
@@ -82,20 +62,7 @@ export default function Home() {
   const handleAnimationComplete = useCallback(() => {
     setShowContent(true)
     setAppLoading(false)
-  }, [setAppLoading])
-
-  // If LaunchReady, show Launch page first
-  if (launchReady && showLaunchPage) {
-    return (
-      <LaunchingPage
-        onEnter={async () => {
-          // Wait a bit to show loader animation
-          await new Promise(resolve => setTimeout(resolve, 5500))
-          setShowLaunchPage(false)
-        }}
-      />
-    )
-  }    
+  }, [setAppLoading])   
 
   return (
     <main
