@@ -21,8 +21,6 @@ export default function Home() {
   const { setAppLoading } = useLoading()
   const [loading, setLoading] = useState(true)
   const [showContent, setShowContent] = useState(false)
-  const [launchReady, setLaunchReady] = useState(false)
-  const [showLaunchPage, setShowLaunchPage] = useState(false)
 
   const [componentsLoaded, setComponentsLoaded] = useState({
     promotion: false,
@@ -32,23 +30,6 @@ export default function Home() {
     events: false,
     team: false,
   })
-
-  // Fetch Launch flag from API
-  useEffect(() => {
-    async function fetchLaunch() {
-      try {
-        const res = await fetch('/api/HomePageContent')
-        const data = await res.json()
-        if (data.homepageData?.Launch_ready === 'TRUE') {
-          setLaunchReady(true)
-          setShowLaunchPage(true)
-        }
-      } catch (err) {
-        console.error('Failed to fetch Launch flag:', err)
-      }
-    }
-    fetchLaunch()
-  }, [])
 
   // Memoized handlers
   const handlePromotionLoad = useCallback(() => {
