@@ -11,6 +11,16 @@ export default function Navbar() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [open, setOpen] = useState(false)
 
+  // Subchapter mapping with slugs matching rewrites
+  const subChapters = [
+    { name: 'RAS', slug: 'https://ieee-main-new-uat-git-ras-manujaya-pereras-projects.vercel.app' },
+    { name: 'CS', slug: 'https://ieee-main-new-uat-git-cs-manujaya-pereras-projects.vercel.app' },
+    { name: 'ComSoc', slug: 'https://ieee-main-new-uat-git-comsoc-manujaya-pereras-projects.vercel.app' },
+    { name: 'PES', slug: 'https://ieee-main-new-uat-git-pes-manujaya-pereras-projects.vercel.app' },
+    { name: 'IAS', slug: 'https://ieee-main-new-uat-git-ias-manujaya-pereras-projects.vercel.app' },
+    { name: 'WIE', slug: 'https://ieee-main-new-uat-git-wie-manujaya-pereras-projects.vercel.app' }
+  ]  
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-black bg-opacity-70 backdrop-blur-md z-50 shadow-md">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 md:px-10 h-16">
@@ -29,15 +39,9 @@ export default function Navbar() {
         </Link>
         {/* Desktop Links */}
         <ul className="hidden md:flex space-x-8 text-white font-medium text-lg items-center">
-          <li>
-            <Link href="/" className="hover:text-green-500 transition">Home</Link>
-          </li>
-          <li>
-            <a href="#about" className="hover:text-green-500 transition">About</a>
-          </li>
-          <li>
-            <a href="/news" className="hover:text-green-500 transition">News</a>
-          </li>
+          <li><Link href="/" className="hover:text-blue-500 transition">Home</Link></li>
+          <li><a href="#about" className="hover:text-blue-500 transition">About</a></li>
+          <li><a href="/news" className="hover:text-blue-500 transition">News</a></li>
 
           {/* Sub Chapters Dropdown */}
           <li
@@ -50,11 +54,13 @@ export default function Navbar() {
             </button>
             {isDropdownOpen && (
               <ul className="absolute top-full mt-2 bg-white text-black rounded shadow-lg py-2 w-48 z-50">
-                <li><Link href="https://www.ieee-ruhuna-wie.com" className="block px-4 py-2 hover:bg-green-100">WIE</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-ras.com" className="block px-4 py-2 hover:bg-green-100">RAS</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-pes.com" className="block px-4 py-2 hover:bg-green-100">PES</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-cs.com" className="block px-4 py-2 hover:bg-green-100">CS</Link></li>
-                <li><Link href="https://www.ieee-ruhuna-comsoc.com" className="block px-4 py-2 hover:bg-green-100">ComSoc</Link></li>
+                {subChapters.map((chapter) => (
+                  <li key={chapter.slug}>
+                    <Link href={chapter.slug} className="block px-4 py-2 hover:bg-blue-100">
+                      {chapter.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             )}
           </li>
@@ -103,11 +109,17 @@ export default function Navbar() {
                   Sub Chapters ▾
                 </summary>
                 <ul className="mt-2 pl-4 flex flex-col space-y-2 text-black bg-white rounded p-2">
-                  <li><Link href="https://www.ieee-ruhuna-wie.com" className="hover:bg-green-100 px-2 py-1 rounded">WIE</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-ras.com" className="hover:bg-green-100 px-2 py-1 rounded">RAS</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-pes.com" className="hover:bg-green-100 px-2 py-1 rounded">PES</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-cs.com" className="hover:bg-green-100 px-2 py-1 rounded">CS</Link></li>
-                  <li><Link href="https://www.ieee-ruhuna-comsoc.com" className="hover:bg-green-100 px-2 py-1 rounded">ComSoc</Link></li>
+                  {subChapters.map((chapter) => (
+                    <li key={chapter.slug}>
+                      <Link
+                        href={chapter.slug}
+                        className="hover:bg-blue-100 px-2 py-1 rounded"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {chapter.name}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </details>
             </li>

@@ -1,12 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 
-function Counter({ target, duration = 2000 }: { target: number; duration?: number }) {
+function Counter({
+  target,
+  duration = 2000,
+  trigger,
+}: { target: number; duration?: number; trigger: boolean }) {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
+    if (!trigger) return // don’t start until visible
+
     const start = Date.now()
     const step = () => {
       const now = Date.now()
@@ -15,7 +21,7 @@ function Counter({ target, duration = 2000 }: { target: number; duration?: numbe
       if (progress < 1) requestAnimationFrame(step)
     }
     step()
-  }, [target, duration])
+  }, [target, duration, trigger])
 
   return <span>{count}</span>
 }
@@ -34,6 +40,9 @@ export default function About() {
   const [projects, setProjects] = useState(0)
   const [members, setMembers] = useState(0)
   const [subchapters, setSubchapters] = useState(0)
+  const [visible, setVisible] = useState(false)
+
+  const sectionRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     async function fetchData() {
@@ -55,9 +64,29 @@ export default function About() {
     fetchData()
   }, [])
 
+  // Observe when the section is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.disconnect() // only trigger once
+        }
+      },
+      { threshold: 0.3 } // 30% visible triggers
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section
       id="about"
+      ref={sectionRef}
       className="w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-10 py-16 md:py-20 text-white rounded-3xl bg-neutral-900/60 backdrop-blur-md overflow-hidden"
     >
       {/* Heading & Paragraphs */}
@@ -82,9 +111,9 @@ export default function About() {
           { label: 'Subchapters', value: subchapters },
         ].map(({ label, value }) => (
           <div key={label} className="flex flex-col items-center relative">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full before:absolute before:inset-0 before:rounded-full before:bg-green-500/30 before:blur-xl before:animate-pulse">
-              <span className="text-3xl sm:text-4xl font-extrabold text-green-400 z-10">
-                <Counter target={value} />
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center rounded-full before:absolute before:inset-0 before:rounded-full before:bg-blue-500/30 before:blur-xl before:animate-pulse">
+              <span className="text-3xl sm:text-4xl font-extrabold text-blue-400 z-10">
+                <Counter target={value} trigger={visible} />
               </span>
             </div>
             <p className="mt-2 uppercase text-xs sm:text-sm tracking-wider text-gray-300">{label}</p>
