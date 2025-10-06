@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IEEE Ruhuna Main Website
 
-## Getting Started
+This repository contains the source code for the **IEEE Student Branch of University of Ruhuna** website. It is built with **Next.js**, **React**, and **TailwindCSS**, and integrates modern animations, UI components, and Google APIs.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+* **Framework:** [Next.js 15](https://nextjs.org/)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Styling:** [TailwindCSS 4](https://tailwindcss.com/)
+* **UI & Animations:**
+
+  * [Framer Motion](https://www.framer.com/motion/)
+  * [GSAP](https://greensock.com/gsap/)
+  * [Headless UI](https://headlessui.com/)
+  * [Lucide Icons](https://lucide.dev/)
+* **Utilities:**
+
+  * [clsx](https://github.com/lukeed/clsx) – conditional classnames
+  * [react-icons](https://react-icons.github.io/react-icons/)
+  * [react-google-recaptcha](https://www.npmjs.com/package/react-google-recaptcha)
+* **Monitoring:** [Vercel Speed Insights](https://vercel.com/docs/analytics/speed-insights)
+* **Linting:** ESLint + Next.js config
+
+---
+
+## 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/<your-org>/ieee-main.git
+cd ieee-main
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## 🛠️ Development
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Start the production server:
 
-## Learn More
+```bash
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+Lint the code:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run lint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🌐 Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project is optimized for **Vercel deployment**.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* The **`main`** branch is deployed at the primary domain (e.g., `https://ieee.uor.lk`).
+* Each subchapter has its own branch, and Vercel automatically deploys them with preview URLs.
+* With a custom domain, you can configure **rewrites** so that each branch is accessible under a specific path.
+
+### 🔗 Example Mapping
+
+| Branch   | URL Path  | Example (with domain `ieee.uor.lk`)                      |
+| -------- | --------- | -------------------------------------------------------- |
+| `main`   | `/`       | [https://ieee.uor.lk/](https://ieee.uor.lk/)             |
+| `ras`    | `/ras`    | [https://ieee.uor.lk/ras](https://ieee.uor.lk/ras)       |
+| `pes`    | `/pes`    | [https://ieee.uor.lk/pes](https://ieee.uor.lk/pes)       |
+| `cs`     | `/cs`     | [https://ieee.uor.lk/cs](https://ieee.uor.lk/cs)         |
+| `comsoc` | `/comsoc` | [https://ieee.uor.lk/comsoc](https://ieee.uor.lk/comsoc) |
+| `wie`    | `/wie`    | [https://ieee.uor.lk/wie](https://ieee.uor.lk/wie)       |
+| `ias`    | `/ias`    | [https://ieee.uor.lk/ias](https://ieee.uor.lk/ias)       |
+
+⚡ This ensures all chapters are hosted under **one unified domain** while being developed and maintained on separate branches.
+
+---
+
+## 📁 Project Structure
+
+```
+ieee-main/
+├── app/               # Next.js App Router pages
+├── components/        # Reusable UI components
+├── contexts/          # React contexts (e.g., LoadingContext)
+├── public/            # Static assets (images, icons, etc.)
+├── styles/            # Global styles (Tailwind setup)
+├── next.config.ts     # Next.js configuration (with rewrites & headers)
+├── package.json       # Dependencies & scripts
+└── README.md          # Documentation
+```
+
+---
+
+## 🔑 Environment Variables
+
+Create a `.env.local` file in the root directory and configure the following (if required):
+
+```env
+GOOGLE_API_KEY=your-api-key
+```
+
+---
+
+## ✨ Features
+
+* Responsive design with TailwindCSS
+* Animated landing and loader pages
+* Floating carousel & interactive circuit animations
+* Dynamic content from APIs
+* Multi-chapter support (RAS, PES, CS, ComSoc, WIE, IAS)
+* Contact form with Google reCAPTCHA
+
+---
+
+## 📜 License
+
+This project is maintained by the **IEEE Student Branch, University of Ruhuna**.
+For inquiries, please contact the webmaster or branch executive committee.
+
+---
